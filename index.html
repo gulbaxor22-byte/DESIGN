@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Kids Fashion & Production Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;600;700&family=Fira+Code:wght@400;500;600;700&family=Fredoka:wght@500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👗</text></svg>">
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- SIDEBAR -->
+    <aside class="app-sidebar" id="appSidebar">
+      <div class="sidebar-header">
+        <div class="brand-badge">
+          <div class="brand-icon">✨</div>
+          <div class="brand-text">
+            <h1 data-i18n="appName">AI Kids Fashion</h1>
+            <span data-i18n="appTagline">Production Ecosystem</span>
+          </div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a class="nav-item active" data-view="dashboard">
+          <span class="nav-icon">🏠</span>
+          <span data-i18n="nav_dashboard">Bosh sahifa</span>
+        </a>
+        <a class="nav-item" data-view="models">
+          <span class="nav-icon">👗</span>
+          <span data-i18n="nav_models">Modellar</span>
+          <span class="nav-badge" id="sidebarModelCount">5</span>
+        </a>
+        <a class="nav-item" data-view="designer">
+          <span class="nav-icon">🎨</span>
+          <span data-i18n="nav_designer">AI Dizayn Generator</span>
+        </a>
+        <a class="nav-item" data-view="cad">
+          <span class="nav-icon">📐</span>
+          <span data-i18n="nav_cad">Konstruktor / Lekalo</span>
+        </a>
+        <a class="nav-item" data-view="materials">
+          <span class="nav-icon">🧵</span>
+          <span data-i18n="nav_materials">Materiallar bazasi</span>
+        </a>
+        <a class="nav-item" data-view="cutting">
+          <span class="nav-icon">✂️</span>
+          <span data-i18n="nav_cutting">Bichuv sarfi</span>
+        </a>
+        <a class="nav-item" data-view="sewing">
+          <span class="nav-icon">🪡</span>
+          <span data-i18n="nav_sewing">Tikuv texnologiyasi</span>
+        </a>
+        <a class="nav-item" data-view="techpack">
+          <span class="nav-icon">📋</span>
+          <span data-i18n="nav_techpack">Texnologik karta</span>
+        </a>
+        <a class="nav-item" data-view="costing">
+          <span class="nav-icon">💰</span>
+          <span data-i18n="nav_costing">Tannarx hisoblash</span>
+        </a>
+        <a class="nav-item" data-view="production">
+          <span class="nav-icon">📦</span>
+          <span data-i18n="nav_production">Ishlab chiqarish & QC</span>
+        </a>
+        <a class="nav-item" data-view="analytics">
+          <span class="nav-icon">📊</span>
+          <span data-i18n="nav_analytics">Hisobotlar</span>
+        </a>
+        <a class="nav-item" data-view="library">
+          <span class="nav-icon">📚</span>
+          <span data-i18n="nav_library">Kutubxona</span>
+        </a>
+        <a class="nav-item" data-view="ai-technologist">
+          <span class="nav-icon">🤖</span>
+          <span data-i18n="nav_ai_technologist">AI Texnolog</span>
+        </a>
+        
+        <!-- Korxona / Floor Mode -->
+        <a class="nav-item korxona-highlight" data-view="korxona">
+          <span class="nav-icon">🏭</span>
+          <span data-i18n="nav_korxona_mode">Korxona / Mobil rejim</span>
+        </a>
+
+        <!-- Sidebar VIP Card -->
+        <div class="sidebar-vip-card" onclick="app.openPremiumModal()">
+          <div class="vip-card-header">
+            <span class="vip-badge-icon">👑</span>
+            <span class="vip-badge-title">PREMIUM VIP</span>
+          </div>
+          <p class="vip-card-desc">Cheksiz AI Dizayn, 3D Lekalo & Korxona ERP imkoniyatlari</p>
+          <button class="btn btn-vip-cta btn-sm">Ochish ✨</button>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <div class="user-avatar" id="userAvatarBadge">AD</div>
+          <div class="user-info">
+            <div class="name" id="userNameLabel">Bosh Texnolog-Konstruktor</div>
+            <div class="role" id="userRoleBadge">Admin & Designer</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT AREA -->
+    <div class="main-wrapper">
+      <!-- TOP NAVBAR -->
+      <header class="top-navbar">
+        <div class="nav-left">
+          <div class="page-title">
+            <h2 id="currentPageHeader">Bosh sahifa (Dashboard)</h2>
+          </div>
+          <div class="search-box">
+            <span>🔍</span>
+            <input type="text" id="globalSearchInput" placeholder="Model, mato yoki chok qidirish...">
+          </div>
+        </div>
+
+        <div class="nav-right">
+          <!-- Quick Model Selector -->
+          <select id="topModelSelector" class="form-select" style="width: auto; padding: 6px 12px; font-size: 13px;">
+            <!-- Filled dynamically -->
+          </select>
+
+          <!-- Language Selector -->
+          <div class="lang-switcher">
+            <button class="lang-btn active" data-lang="uz">UZ</button>
+            <button class="lang-btn" data-lang="ru">RU</button>
+            <button class="lang-btn" data-lang="en">EN</button>
+          </div>
+
+          <!-- PREMIUM VIP BUTTON -->
+          <button class="btn btn-premium-gold btn-sm" id="btnOpenPremiumModal" onclick="app.openPremiumModal()">
+            <span class="crown-icon">👑</span>
+            <span>PREMIUM PRO</span>
+          </button>
+
+          <!-- New Model Action -->
+          <button class="btn btn-accent btn-sm" id="btnOpenNewModelModal">
+            <span>➕</span>
+            <span data-i18n="btn_new_model">+ Yangi model</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- 1. VIEW: DASHBOARD -->
+      <main class="app-view active" id="view-dashboard">
+        <div class="section-header-flex">
+          <div>
+            <h3 data-i18n="kpi_today_title">Bugungi ishlab chiqarish ko'rsatkichlari</h3>
+            <p style="font-size: 12.5px; color: var(--text-muted);">Real vaqt rejimida korxona quvvati va modellar holati</p>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn btn-outline btn-sm" onclick="app.navigateTo('designer')">🎨 AI Dizayn</button>
+            <button class="btn btn-primary btn-sm" onclick="app.navigateTo('ai-technologist')">🤖 AI Texnolog</button>
+          </div>
+        </div>
+
+        <!-- KPI CARDS -->
+        <div class="kpi-grid">
+          <div class="kpi-card pink">
+            <div class="kpi-icon-wrap">👗</div>
+            <div class="kpi-info">
+              <div class="kpi-val" id="kpiNewModels">5</div>
+              <div class="kpi-label" data-i18n="kpi_new_models">Yangi modellar</div>
+            </div>
+          </div>
+          <div class="kpi-card sky">
+            <div class="kpi-icon-wrap">⚙️</div>
+            <div class="kpi-info">
+              <div class="kpi-val" id="kpiInProduction">12</div>
+              <div class="kpi-label" data-i18n="kpi_in_production">Ishlab chiqarilmoqda</div>
+            </div>
+          </div>
+          <div class="kpi-card emerald">
+            <div class="kpi-icon-wrap">✅</div>
+            <div class="kpi-info">
+              <div class="kpi-val" id="kpiReadyModels">8</div>
+              <div class="kpi-label" data-i18n="kpi_ready_models">Tayyor modellar</div>
+            </div>
+          </div>
+          <div class="kpi-card amber">
+            <div class="kpi-icon-wrap">🧵</div>
+            <div class="kpi-info">
+              <div class="kpi-val" id="kpiMaterials">47</div>
+              <div class="kpi-label" data-i18n="kpi_materials">Material turlari</div>
+            </div>
+          </div>
+          <div class="kpi-card sky">
+            <div class="kpi-icon-wrap">✂️</div>
+            <div class="kpi-info">
+              <div class="kpi-val" id="kpiInCutting">6</div>
+              <div class="kpi-label" data-i18n="kpi_in_cutting">Bichuvda</div>
+            </div>
+          </div>
+          <div class="kpi-card pink">
+            <div class="kpi-icon-wrap">🪡</div>
+            <div class="kpi-info">
+              <div class="kpi-val" id="kpiInSewing">9</div>
+              <div class="kpi-label" data-i18n="kpi_in_sewing">Tikuvda</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ACTIVE SELECTED MODEL CONTROL CENTER HERO -->
+        <div id="dashboardActiveModelHero" style="margin-bottom: 24px;">
+          <!-- Rendered dynamically via JS based on selectedModelId -->
+        </div>
+
+        <!-- RECENT MODELS SECTION -->
+        <div class="section-header-flex" style="margin-top: 10px;">
+          <div>
+            <h3 data-i18n="recent_models_title">Modellar katalogi va tanlash</h3>
+            <p style="font-size: 12px; color: var(--text-muted);">Kerakli modelni tanlang — butun tizim (bichuv, lekalo, tikuv, tannarx) shu modelga moslashadi</p>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="app.navigateTo('models')">
+            <span>👗 Barcha modellar</span>
+          </button>
+        </div>
+
+        <div class="models-grid" id="dashboardModelsGrid">
+          <!-- Rendered via JS -->
+        </div>
+
+        <!-- DASHBOARD BOTTOM AI ASSISTANT BANNER (BOTTOM-LEFT) -->
+        <div style="margin-top: 24px; display: grid; grid-template-columns: 1fr; max-width: 540px;">
+          <div style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); border: 1.5px solid #bae6fd; border-radius: 16px; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 14px; box-shadow: 0 4px 14px rgba(2, 132, 199, 0.08);">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <div style="width: 42px; height: 42px; border-radius: 12px; background: linear-gradient(135deg, #0284c7, #38bdf8); display: flex; align-items: center; justify-content: center; font-size: 22px; color: #fff; box-shadow: 0 4px 10px rgba(2, 132, 199, 0.3);">🤖</div>
+              <div>
+                <h4 style="font-size: 14.5px; color: #1e1b4b; margin: 0 0 2px 0; font-family: 'Fredoka', sans-serif;">AI Texnolog Maslahatchi</h4>
+                <p style="font-size: 12px; color: #64748b; margin: 0;">Mato sarfi, lekalo va tannarx bo'yicha tezkor yordam</p>
+              </div>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="app.toggleFloatingAiChat()" style="white-space: nowrap;">
+              <span>💬 Savol berish</span>
+            </button>
+          </div>
+        </div>
+      </main>
+
+      <!-- 2. VIEW: MODELS CATALOG -->
+      <section class="app-view" id="view-models">
+        <div class="section-header-flex">
+          <div>
+            <h3 data-i18n="nav_models">Modellar Boshqaruvi</h3>
+            <p style="font-size: 12.5px; color: var(--text-muted);">Barcha bolalar kiyimi modellari, o'lchamlari va tannarxi</p>
+          </div>
+          <button class="btn btn-accent btn-sm" onclick="app.openNewModelModal()">
+            <span>➕</span>
+            <span data-i18n="btn_new_model">+ Yangi model</span>
+          </button>
+        </div>
+
+        <div class="models-grid" id="allModelsGrid">
+          <!-- Rendered via JS -->
+        </div>
+
+        <!-- SELECTED MODEL VISUAL PICTURES SHOWCASE (PASTKI RASMLAR BO'LIMI) -->
+        <div class="selected-model-bottom-showcase" id="selectedModelBottomShowcase">
+          <!-- Dynamically populated on model click -->
+        </div>
+      </section>
+
+      <!-- 3. VIEW: AI DESIGNER -->
+      <section class="app-view" id="view-designer">
+        <div class="section-header-flex">
+          <div>
+            <h3 data-i18n="ai_title">AI Kids Fashion Dizayn Generatori</h3>
+            <p style="font-size: 12.5px; color: var(--text-muted);" data-i18n="ai_subtitle">Matnli tavsif va parametrlardan 3D/2D visual model konsepsiyasi yaratish</p>
+          </div>
+        </div>
+
+        <div class="ai-designer-layout">
+          <!-- Control Panel -->
+          <div class="ai-control-panel">
+            <div class="form-group">
+              <label>Model tavsifi (Prompt)</label>
+              <textarea class="form-textarea" id="aiPromptInput" placeholder="Masalan: 8 yoshli qiz bola uchun zamonaviy sport kostyum, pushti va oq rang, kapyushonli, oldida cho'ntak, yon tomonida dekorativ lampas.">8 yoshli qiz bola uchun zamonaviy sport kostyum, pushti va oq rang, kapyushonli, oldida cho'ntak, yon tomonida dekorativ lampas.</textarea>
+            </div>
+
+            <div class="form-group">
+              <label data-i18n="ai_style_tags">Tezkor teglar</label>
+              <div class="quick-tags">
+                <span class="quick-tag" onclick="app.addAiTag('Sport Hoodie')">Hoodie</span>
+                <span class="quick-tag" onclick="app.addAiTag('Sport Shim Jogger')">Sport Shim</span>
+                <span class="quick-tag" onclick="app.addAiTag('Gullik Yozgi Ko\'ylak')">Ko'ylak</span>
+                <span class="quick-tag" onclick="app.addAiTag('Maktab Polo')">Polo</span>
+                <span class="quick-tag" onclick="app.addAiTag('Vetrovka Kurtka')">Kurtka</span>
+                <span class="quick-tag" onclick="app.addAiTag('Kenguru cho\'ntak')">Kenguru cho'ntak</span>
+                <span class="quick-tag" onclick="app.addAiTag('Yon lampas')">Lampas</span>
+                <span class="quick-tag" onclick="app.addAiTag('Ribana manjet')">Ribana manjet</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label data-i18n="ai_color_palette">Asosiy Rang</label>
+              <div class="color-swatches" id="aiColorSwatches">
+                <div class="swatch active" style="background: #f472b6;" data-color="#f472b6" title="Pushti"></div>
+                <div class="swatch" style="background: #0284c7;" data-color="#0284c7" title="Moviy"></div>
+                <div class="swatch" style="background: #10b981;" data-color="#10b981" title="Yashil"></div>
+                <div class="swatch" style="background: #fbbf24;" data-color="#fbbf24" title="Sariq"></div>
+                <div class="swatch" style="background: #a855f7;" data-color="#a855f7" title="Binafsha"></div>
+                <div class="swatch" style="background: #334155;" data-color="#334155" title="Antratsit"></div>
+              </div>
+            </div>
+
+            <button class="btn btn-accent" id="btnGenerateAiDesign" style="width: 100%; justify-content: center; padding: 12px;">
+              <span>✨</span>
+              <span data-i18n="ai_btn_generate">Dizayn Generatsiya Qilish</span>
+            </button>
+
+            <button class="btn btn-primary" id="btnApplyAiToModel" style="width: 100%; justify-content: center; padding: 12px;">
+              <span>📥</span>
+              <span data-i18n="ai_btn_apply_model">Ushbu Konseptdan Model Yaratish</span>
+            </button>
+          </div>
+
+          <!-- Triple Views Viewport -->
+          <div class="ai-render-viewport">
+            <div class="views-triple-grid">
+              <div class="view-card" id="aiViewFrontCard">
+                <!-- Front SVG -->
+              </div>
+              <div class="view-card" id="aiViewBackCard">
+                <!-- Back SVG -->
+              </div>
+              <div class="view-card" id="aiViewSideCard">
+                <!-- Side SVG -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. VIEW: PATTERN CAD & LEKALO -->
+      <section class="app-view" id="view-cad">
+        <div class="section-header-flex">
+          <div>
+            <h3 data-i18n="cad_title">Konstruktor & Lekalo Moduli</h3>
+            <p style="font-size: 12.5px; color: var(--text-muted);" data-i18n="cad_subtitle">Bolalar kiyimi lekalo konstruksiyasi, o'lchamlar gradingi va eksport</p>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn btn-outline btn-sm" id="btnExportSvg">📥 SVG Eksport</button>
+            <button class="btn btn-outline btn-sm" id="btnExportDxf">📐 DXF CAD Eksport</button>
+            <button class="btn btn-primary btn-sm" id="btnPrintPatternPdf">🖨️ PDF Chop etish</button>
+          </div>
+        </div>
+
+        <div class="cad-studio-layout">
+          <!-- CAD Sidebar -->
+          <div class="cad-sidebar-tools">
+            <div class="form-group">
+              <label data-i18n="cad_size_selector">Bazaviy razmer (Bo'y sm)</label>
+              <select class="form-select" id="cadSizeSelector">
+                <option value="92">92 sm (1.5–2 yosh)</option>
+                <option value="98">98 sm (2–3 yosh)</option>
+                <option value="104">104 sm (3–4 yosh)</option>
+                <option value="110">110 sm (4–5 yosh)</option>
+                <option value="116">116 sm (5–6 yosh)</option>
+                <option value="122" selected>122 sm (6–7 yosh)</option>
+                <option value="128">128 sm (7–8 yosh)</option>
+                <option value="134">134 sm (8–9 yosh)</option>
+                <option value="140">140 sm (9–10 yosh)</option>
+                <option value="146">146 sm (10–11 yosh)</option>
+                <option value="152">152 sm (11–12 yosh)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Chok haqi (Seam allowance): <span id="seamValDisplay">0.7 sm</span></label>
+              <input type="range" min="0.5" max="2.0" step="0.1" value="0.7" id="cadSeamSlider">
+            </div>
+
+            <div class="form-group">
+              <label>Erkinlik qo'shimchasi: <span id="easeValDisplay">+4.0 sm</span></label>
+              <input type="range" min="2.0" max="8.0" step="0.5" value="4.0" id="cadEaseSlider">
+            </div>
+
+            <div class="form-group">
+              <label>Gradatsiya qatlamlari</label>
+              <label style="display: flex; align-items: center; gap: 8px; font-size: 12.5px; cursor: pointer;">
+                <input type="checkbox" id="cadGradingCheck" checked>
+                Barcha razmerlarni ustma-ust ko'rsatish
+              </label>
+            </div>
+
+            <div style="margin-top: auto; padding-top: 16px; border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-muted);">
+              💡 <strong>DXF Eksport:</strong> Optitex, Lectra, Gerber va AutoCAD tizimlariga to'g'ridan-to'g'ri mos keladi.
+            </div>
+          </div>
+
+          <!-- Canvas -->
+          <div class="cad-canvas-panel">
+            <div class="cad-toolbar">
+              <div style="font-size: 13px; font-weight: 600;" id="cadSelectedModelTitle">Model: K-025 Sport Hoodie</div>
+              <div style="display: flex; gap: 6px;">
+                <button class="btn btn-outline btn-sm" onclick="app.cadZoom(1.1)">🔍 +</button>
+                <button class="btn btn-outline btn-sm" onclick="app.cadZoom(0.9)">🔍 -</button>
+              </div>
+            </div>
+            <div id="cadSvgContainer">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. VIEW: MATERIALS INVENTORY -->
+      <section class="app-view" id="view-materials">
+        <div class="section-header-flex">
+          <div>
+            <h3 data-i18n="mat_title">Materiallar va Furnitura Bazasi</h3>
+            <p style="font-size: 12.5px; color: var(--text-muted);">Matolar, trikotaj polotnolar, iplar, furnituralar va qoldiqlar</p>
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="app.openNewMaterialModal()">
+            <span>➕</span>
+            <span data-i18n="mat_btn_add">+ Yangi material</span>
+          </button>
+        </div>
+
+        <div class="table-responsive">
+          <table class="custom-table" id="materialsTable">
+            <thead>
+              <tr>
+                <th data-i18n="mat_col_name">Material nomi</th>
+                <th data-i18n="mat_col_type">Turi</th>
+                <th data-i18n="mat_col_comp">Tarkibi</th>
+                <th data-i18n="mat_col_weight">Gramaj</th>
+                <th data-i18n="mat_col_width">Eni</th>
+                <th data-i18n="mat_col_price">Narxi</th>
+                <th data-i18n="mat_col_color">Rangi</th>
+                <th data-i18n="mat_col_stock">Omborda</th>
+                <th data-i18n="mat_col_supplier">Yetkazib beruvchi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 6. VIEW: CUTTING & CONSUMPTION -->
+      <section class="app-view" id="view-cutting">
+        <div class="section-header-flex">
+          <div>
+            <h3 data-i18n="cut_title">Bichuv va Sarf Kalkulyatori</h3>
+            <p style="font-size: 12.5px; color: var(--text-muted);" data-i18n="cut_subtitle">Raskladka optimizatsiyasi, foydali maydon va chiqindi hisob-kitobi</p>
+          </div>
+        </div>
+
+        <div class="cad-studio-layout" style="margin-bottom: 24px;">
+          <!-- Controls -->
+          <div class="cad-sidebar-tools">
+            <div class="form-group">
+              <label data-i18n="cut_fabric_width">Mato eni (sm)</label>
+              <input type="number" class="form-input" id="cutFabricWidth" value="185">
+            </div>
+            <div class="form-group">
+              <label>Gramaj (g/m²)</label>
+              <input type="number" class="form-input" id="cutFabricGramaj" value="320">
+            </div>
+            <div class="form-group">
+              <label>1 dona uchun sarf uzunligi (m)</label>
+              <input type="number" step="0.01" class="form-input" id="cutUnitLength" value="0.82">
+            </div>
+            <div class="form-group">
+              <label data-i18n="cut_order_qty">Buyurtma soni (dona)</label>
+              <input type="number" class="form-input" id="cutBatchQty" value="100">
+            </div>
+            <div class="form-group">
+              <label data-i18n="cut_layers">Qatlamlar soni (Spread plies)</label>
+              <input type="number" class="form-input" id="cutLayersCount" value="20">
+            </div>
+            <button class="btn btn-primary" onclick="app.updateCuttingCalculations()" style="width: 100%; justify-content: center;">
+              🔄 Qayta hisoblash
+            </button>
+          </div>
+
+          <!-- Formula & Results -->
+          <div class="cad-canvas-panel" style="padding: 24px;">
+            <h4 style="font-size: 16px; margin-bottom: 12px;" data-i18n="cut_formula_box">Shaffof hisoblash formulasi</h4>
+            
+            <div class="formula-box" id="cuttingFormulaBox">
+              <!-- Rendered via JS -->
+            </div>
+
+            <!-- Scaled Batch Benchmarks -->
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 16px;">
+              <div style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 12px; border-radius: 8px; text-align: center;">
+                <div style="font-size: 11px; color: var(--text-muted); font-weight: 600;">1 DONA</div>
+                <div style="font-size: 16px; font-weight: 800; color: #0284c7;" id="bench1Qty">0.82 m</div>
+                <div style="font-size: 11px; color: var(--text-muted);" id="bench1Kg">0.485 kg</div>
+              </div>
+              <div style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 12px; border-radius: 8px; text-align: center;">
+                <div style="font-size: 11px; color: var(--text-muted); font-weight: 600;">10 DONA</div>
+                <div style="font-size: 16px; font-weight: 800; color: #0284c7;" id="bench10Qty">8.2 m</div>
+                <div style="font-size: 11px; color: var(--text-muted);" id="bench10Kg">4.85 kg</div>
+              </div>
+              <div style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 12px; border-radius: 8px; text-align: center;">
+                <div style="font-size: 11px; color: var(--text-muted); font-weight: 600;">100 DONA</div>
+                <div style="font-size: 16px; font-weight: 800; color: #0284c7;" id="bench100Qty">82 m</div>
+                <div style="font-size: 11px; color: var(--text-muted);" id="bench100Kg">48.5 kg</div>
+              </div>
+              <div style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 12px; border-radius: 8px; text-align: center;">
+                <div style="font-size: 11px; color: var(--text-muted); font-weight: 600;">1000 DONA</div>
+                <div style="font-size: 16px; font-weight: 800; color: #0284c7;" id="bench1000Qty">820 m</div>
+                <div style="font-size: 11px; color: var(--text-muted);" id="bench1000Kg">485 kg</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2D Marker Nesting Simulation View -->
+        <div class="cad-canvas-panel" style="padding: 20px;">
+          <h4 style="font-size: 15px; margin-bottom: 12px;">📐 Bichuv Stolidagi 2D Raskladka sxemasi</h4>
+          <div id="markerSvgWrapper">
+            <!-- Rendered via JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. VIEW: SEWING TECHNOLOGY (TEXNOLOGIK JARAYONLAR VA VAQT ME'YORI JADVALI) -->
+      <section class="app-view" id="view-sewing">
+        <div class="section-header-flex">
+          <div>
+            <h3 data-i18n="sew_title">Tikuv Texnologik Jarayonlari va Vaqt Me'yori Jadvali</h3>
+            <p style="font-size: 12.5px; color: var(--text-muted);" data-i18n="sew_subtitle">Operatsiyalar ketma-ketligi, mashina turi, ip sarfi va ish haqi kalkulyatsiyasi</p>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <button class="btn btn-outline btn-sm" onclick="app.printSewingRouting()">
+              <span>🖨️</span>
+              <span>Marshrut xaritasini chop etish</span>
+            </button>
+            <button class="btn btn-primary btn-sm" onclick="app.openNewOperationModal()">
+              <span>➕</span>
+              <span data-i18n="sew_btn_add_op">+ Yangi operatsiya qo'shish</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Operations Summary KPI -->
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px;">
+          <div class="kpi-card emerald">
+            <div class="kpi-info">
+              <div class="kpi-val" id="sewTotalTimeDisplay">3 min 20 sek</div>
+              <div class="kpi-label" data-i18n="sew_total_time">Umumiy tikuv vaqti</div>
+            </div>
+          </div>
+          <div class="kpi-card sky">
+            <div class="kpi-info">
+              <div class="kpi-val" id="sewTotalThreadDisplay">77.3 m</div>
+              <div class="kpi-label" data-i18n="sew_total_thread">Umumiy ip sarfi</div>
+            </div>
+          </div>
+          <div class="kpi-card amber">
+            <div class="kpi-info">
+              <div class="kpi-val" id="sewTotalLaborCostDisplay">36 000 so'm</div>
+              <div class="kpi-label">Tikuv ish haqi (Labor)</div>
+            </div>
+          </div>
+          <div class="kpi-card pink">
+            <div class="kpi-info">
+              <div class="kpi-val" id="sewOpsCountDisplay">10 ta</div>
+              <div class="kpi-label">Jami operatsiyalar soni</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section Filter Tabs -->
+        <div class="sewing-filter-bar" style="display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;">
+          <button class="btn btn-outline btn-sm active" id="btnSewFilterAll" onclick="app.filterSewingTable('all')">🪡 Barcha jarayonlar</button>
+          <button class="btn btn-outline btn-sm" id="btnSewFilterFront" onclick="app.filterSewingTable('front')">1. Old bo'lak uzeli</button>
+          <button class="btn btn-outline btn-sm" id="btnSewFilterBack" onclick="app.filterSewingTable('back')">2. Orqa bo'lak uzeli</button>
+          <button class="btn btn-outline btn-sm" id="btnSewFilterSleeve" onclick="app.filterSewingTable('sleeve')">3. Yeng uzeli</button>
+          <button class="btn btn-outline btn-sm" id="btnSewFilterHood" onclick="app.filterSewingTable('hood')">4. Kapyushon / Yoqa</button>
+          <button class="btn btn-outline btn-sm" id="btnSewFilterAssembly" onclick="app.filterSewingTable('assembly')">5. Montaj yig'ish</button>
+          <button class="btn btn-outline btn-sm" id="btnSewFilterVto" onclick="app.filterSewingTable('vto')">6. VTO / Dazmollash</button>
+        </div>
+
+        <div class="table-responsive">
+          <table class="custom-table" id="sewingOpsTable">
+            <thead>
+              <tr>
+                <th style="width: 45px;">№</th>
+                <th style="min-width: 260px;" data-i18n="sew_col_op">Texnologik operatsiya nomi</th>
+                <th style="min-width: 140px;">Bo'lim / Uzel</th>
+                <th style="min-width: 160px;" data-i18n="sew_col_machine">Mashina / Uskuna turi</th>
+                <th style="width: 100px;" data-i18n="sew_col_seam_len">Chok (sm)</th>
+                <th style="width: 100px;" data-i18n="sew_col_thread_cons">Ip sarfi (m)</th>
+                <th style="width: 100px;" data-i18n="sew_col_time_sec">Vaqt (sek)</th>
+                <th style="width: 120px;" data-i18n="sew_col_op_cost">Operatsiya narxi</th>
+                <th style="width: 80px;">Amal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Rendered via JS -->
+            </tbody>
+            <tfoot id="sewingOpsTableFoot">
+              <!-- Summary row via JS -->
+            </tfoot>
+          </table>
+        </div>
+      </section>
+
+      <!-- 8. VIEW: TECH PACK -->
+      <section class="app-view" id="view-techpack">
+        <div class="section-header-flex no-print">
+          <div>
+            <h3 data-i18n="tp_title">Texnologik Karta (Production Tech Pack)</h3>
+            <p style="font-size: 12.5px; color: var(--text-muted);">To'liq 15-bandli ishlab chiqarish pasporti va A4 chop etish</p>
+          </div>
+          <button class="btn btn-primary" onclick="window.print()">
+            <span>🖨️</span>
+            <span data-i18n="tp_btn_print">Chop etish (Print / PDF)</span>
+          </button>
+        </div>
+
+        <div class="techpack-container" id="techPackViewContainer">
+          <!-- Rendered via JS -->
+        </div>
+      </section>
+
+      <!-- 9. VIEW: COSTING -->
+      <section class="app-view" id="view-costing">
+        <div class="section-header-flex">
+          <div>
+            <h3 data-i18n="cost_title">Tannarx va Foyda Kalkulyatori</h3>
+            <p style="font-size: 12.5px; color: var(--text-muted);" data-i18n="cost_subtitle">Har bir xarajat komponentining shaffof matematik formulasi</p>
+          </div>
+        </div>
+
+        <div class="cad-studio-layout">
+          <!-- Cost Breakdown Inputs -->
+          <div class="cad-sidebar-tools">
+            <h4 style="font-size: 14px; margin-bottom: 8px;">Xarajatlar moddasi (1 dona)</h4>
+
+            <div class="form-group">
+              <label data-i18n="cost_fabric">Mato xarajati (so'm)</label>
+              <input type="number" class="form-input" id="costFabricInput" value="20370">
+            </div>
+            <div class="form-group">
+              <label data-i18n="cost_trims">Furnitura va etiketka</label>
+              <input type="number" class="form-input" id="costTrimsInput" value="5400">
+            </div>
+            <div class="form-group">
+              <label data-i18n="cost_thread">Ip xarajati</label>
+              <input type="number" class="form-input" id="costThreadInput" value="1160">
+            </div>
+            <div class="form-group">
+              <label data-i18n="cost_cutting">Bichuv xarajati</label>
+              <input type="number" class="form-input" id="costCuttingInput" value="3500">
+            </div>
+            <div class="form-group">
+              <label data-i18n="cost_sewing">Tikuv ish haqi</label>
+              <input type="number" class="form-input" id="costSewingInput" value="36000">
+            </div>
+            <div class="form-group">
+              <label data-i18n="cost_packing">Qadoqlash va VTO</label>
+              <input type="number" class="form-input" id="costPackingInput" value="1850">
+            </div>
+            <div class="form-group">
+              <label data-i18n="cost_margin">Rejalashtirilgan Marja %</label>
+              <select class="form-select" id="costMarginSelect">
+                <option value="20">20% (Tejamkor)</option>
+                <option value="30">30% (Standart)</option>
+                <option value="35" selected>35% (Optimal)</option>
+                <option value="40">40% (Premium)</option>
+                <option value="50">50% (Brend / Eksport)</option>
+              </select>
+            </div>
+
+            <button class="btn btn-primary" onclick="app.updateCostingCalculations()" style="width: 100%; justify-content: center;">
+              🔄 Qayta hisoblash
+            </button>
+          </div>
+
+          <!-- Real-Time Cost & Profit Display -->
+          <div class="cad-canvas-panel" style="padding: 28px;">
+            <div class="formula-box" id="costingFormulaDisplay">
+              <!-- Rendered via JS -->
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 20px;">
+              <div style="background: #eff6ff; border: 2px solid #3b82f6; border-radius: 12px; padding: 20px; text-align: center;">
+                <div style="font-size: 12px; font-weight: 700; color: #1d4ed8; text-transform: uppercase;" data-i18n="cost_total_unit">1 DONA TANNARX</div>
+                <div style="font-size: 32px; font-weight: 900; font-family: 'Outfit', sans-serif; color: #1e3a8a; margin: 8px 0;" id="costTotalDisplay">76 500 so'm</div>
+                <div style="font-size: 12px; color: #64748b;">Barcha to'g'ridan-to'g'ri va ustama xarajatlar bilan</div>
+              </div>
+
+              <div style="background: #ecfdf5; border: 2px solid #10b981; border-radius: 12px; padding: 20px; text-align: center;">
+                <div style="font-size: 12px; font-weight: 700; color: #047857; text-transform: uppercase;" data-i18n="cost_rec_price">TAVSIYA SOTUV NARXI</div>
+                <div style="font-size: 32px; font-weight: 900; font-family: 'Outfit', sans-serif; color: #064e3b; margin: 8px 0;" id="costRecPriceDisplay">103 275 so'm</div>
+                <div style="font-size: 12px; color: #059669;" id="costProfitUnitDisplay">Sof foyda: +26 775 so'm / dona</div>
+              </div>
+            </div>
+
+            <!-- Batch Profit Matrix -->
+            <div style="margin-top: 24px; padding: 16px; background: #f8fafc; border-radius: 8px; border: 1px solid var(--border-color);">
+              <h5 style="font-size: 13px; font-weight: 700; margin-bottom: 10px;">Partiya bo'yicha sof foyda prognozi:</h5>
+              <div style="display: flex; justify-content: space-between; font-size: 13px;">
+                <span>100 dona: <strong id="batch100Profit">2 677 500 so'm</strong></span>
+                <span>500 dona: <strong id="batch500Profit">13 387 500 so'm</strong></span>
+                <span>1 000 dona: <strong id="batch1000Profit">26 775 000 so'm</strong></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 10. VIEW: PRODUCTION & QC -->
+      <section class="app-view" id="view-production">
+        <div class="section-header-flex">
+          <div>
+            <h3 data-i18n="prod_title">Ishlab Chiqarish Jarayoni va Sifat Nazorati (QC)</h3>
+            <p style="font-size: 12.5px; color: var(--text-muted);">Bosqichlar monitoringi va 8-bandli texnik sifat tekshiruvi</p>
+          </div>
+        </div>
+
+        <!-- Stage Timeline -->
+        <div style="background: #ffffff; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 24px;">
+          <h4 style="font-size: 15px; margin-bottom: 16px;" data-i18n="prod_stage_flow">Ishlab chiqarish bosqichlari zanjiri</h4>
+          <div id="productionStagesFlow" style="display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap;">
+            <!-- Rendered via JS -->
+          </div>
+        </div>
+
+        <!-- 8-Point QC Checklist -->
+        <div style="background: #ffffff; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 24px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <h4 style="font-size: 16px;" data-i18n="qc_checklist_title">8-Bosqichli Sifat Nazorati (QC Checklist)</h4>
+            <div id="qcStatusBadge" style="font-size: 13px; font-weight: 700; padding: 6px 14px; border-radius: 20px;">QC: PASS</div>
+          </div>
+
+          <div id="qcChecklistItems">
+            <label class="qc-check-item">
+              <input type="checkbox" id="qc_1" checked>
+              <span data-i18n="qc_item_1">1. O'lchamlar belgilangan toleransga mos (±0.5 sm)</span>
+            </label>
+            <label class="qc-check-item">
+              <input type="checkbox" id="qc_2" checked>
+              <span data-i18n="qc_item_2">2. Choklar tekis, mustahkam va zich tikilgan</span>
+            </label>
+            <label class="qc-check-item">
+              <input type="checkbox" id="qc_3" checked>
+              <span data-i18n="qc_item_3">3. Barcha ip qoldiqlari tozalangan</span>
+            </label>
+            <label class="qc-check-item">
+              <input type="checkbox" id="qc_4" checked>
+              <span data-i18n="qc_item_4">4. Mato yuzasida dog' va defektlar yo'q</span>
+            </label>
+            <label class="qc-check-item">
+              <input type="checkbox" id="qc_5" checked>
+              <span data-i18n="qc_item_5">5. Furnitura (zamok, tugma, knopka) ravon ishlaydi</span>
+            </label>
+            <label class="qc-check-item">
+              <input type="checkbox" id="qc_6" checked>
+              <span data-i18n="qc_item_6">6. Markirovka, label va razmer teglari to'g'ri</span>
+            </label>
+            <label class="qc-check-item">
+              <input type="checkbox" id="qc_7" checked>
+              <span data-i18n="qc_item_7">7. Yakuniy dazmollash (VTO) to'liq bajarilgan</span>
+            </label>
+            <label class="qc-check-item">
+              <input type="checkbox" id="qc_8" checked>
+              <span data-i18n="qc_item_8">8. Individual qadoqlash va shtrix-kod tayyor</span>
+            </label>
+          </div>
+
+          <div style="margin-top: 20px; display: flex; justify-content: flex-end; gap: 12px;">
+            <button class="btn btn-outline" onclick="app.markQcFail()">❌ Qayta ishlashga (QC: FAIL)</button>
+            <button class="btn btn-success" onclick="app.markQcPass()">✅ Tasdiqlash (QC: PASS)</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 11. VIEW: ANALYTICS -->
+      <section class="app-view" id="view-analytics">
+        <div class="section-header-flex">
+          <div>
+            <h3 data-i18n="analytics_title">Ishlab Chiqarish Tahlili va Hisobotlar</h3>
+            <p style="font-size: 12.5px; color: var(--text-muted);">Haftalik unumdorlik, tannarx taqsimoti va chiqindilar nazorati</p>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+          <div style="background: #ffffff; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 24px;">
+            <h4 style="font-size: 15px; margin-bottom: 16px;">📊 Haftalik Ishlab Chiqarish Hajmi (dona)</h4>
+            <canvas id="analyticsBarCanvas" width="450" height="260"></canvas>
+          </div>
+
+          <div style="background: #ffffff; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 24px;">
+            <h4 style="font-size: 15px; margin-bottom: 16px;">🍩 Tannarx Tarkibiy Taqsimoti (%)</h4>
+            <canvas id="analyticsDonutCanvas" width="450" height="260"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!-- 12. VIEW: LIBRARY -->
+      <section class="app-view" id="view-library">
+        <div class="section-header-flex">
+          <div>
+            <h3 data-i18n="lib_title">Professional Kutubxona va Standartlar</h3>
+            <p style="font-size: 12.5px; color: var(--text-muted);">Bolalar o'lchovlari (GOST/EU), choklar klassifikatsiyasi va uskunalar</p>
+          </div>
+        </div>
+
+        <div style="background: #ffffff; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 24px;">
+          <!-- Tabs -->
+          <div style="display: flex; gap: 8px; border-bottom: 1px solid var(--border-color); padding-bottom: 12px; margin-bottom: 20px;">
+            <button class="btn btn-outline btn-sm active" onclick="app.switchLibTab('sizes')">📏 O'lchov Standartlari</button>
+            <button class="btn btn-outline btn-sm" onclick="app.switchLibTab('stitches')">🧵 Chok Turlari (ISO)</button>
+            <button class="btn btn-outline btn-sm" onclick="app.switchLibTab('machines')">⚙️ Tikuv Mashinalari</button>
+            <button class="btn btn-outline btn-sm" onclick="app.switchLibTab('textile')">🌿 Matolar Xususiyati</button>
+          </div>
+
+          <div id="libContentPanel">
+            <!-- Rendered via JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 13. VIEW: AI TECHNOLOGIST CHAT STUDIO -->
+      <section class="app-view" id="view-ai-technologist">
+        <div class="section-header-flex">
+          <div>
+            <h3 data-i18n="tech_ai_title">🤖 AI Texnolog & Konsultant Chat</h3>
+            <p style="font-size: 12.5px; color: var(--text-muted);" data-i18n="tech_ai_subtitle">Bolalar kiyimi ishlab chiqarish, mato sarfi, lekalo va tannarx bo'yicha 24/7 AI Maslahatchi</p>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <button class="btn btn-outline btn-sm" onclick="app.clearAiChat()">
+              <span>🗑️</span>
+              <span>Suhbatni tozalash</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="ai-chat-studio-container">
+          <!-- Chat Header Bar -->
+          <div class="ai-chat-header-bar">
+            <div class="ai-bot-avatar-badge">🤖</div>
+            <div class="ai-bot-info">
+              <h4>AI Texnolog-Muhandis (AI Garment & Textile Expert)</h4>
+              <div class="ai-bot-status">
+                <span class="status-dot-pulse"></span>
+                <span>Online — ISO/GOST standartlari & To'qimachilik intellekti</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Suggestion Chips -->
+          <div class="ai-chat-suggestions">
+            <span class="suggestion-chip" onclick="app.sendQuickAiPrompt('1 dona tolstovka uchun qancha futer va ribana ketadi?')">🧵 Tolstovka mato sarfi</span>
+            <span class="suggestion-chip" onclick="app.sendQuickAiPrompt('Bolalar kiyimida 122 sm razmer uchun standart o\'lchamlar qanday?')">📐 122 sm o'lchamlar (GOST)</span>
+            <span class="suggestion-chip" onclick="app.sendQuickAiPrompt('Trikotaj tikishda mato to\'lqinlanib qolsa qanday bartaraf etiladi?')">⚠️ To'lqinlanish defekti</span>
+            <span class="suggestion-chip" onclick="app.sendQuickAiPrompt('500 dona partiya uchun tannarx va marja kalkulyatsiyasini tuzib ber')">💰 500 dona buyurtma tannarxi</span>
+            <span class="suggestion-chip" onclick="app.sendQuickAiPrompt('4-ipli overlok uchun ip sarfi formulasini tushuntirib ber')">🧵 Ip sarfi formulasi</span>
+          </div>
+
+          <!-- Chat Window Feed -->
+          <div id="aiTechChatWindow" class="ai-chat-window-feed">
+            <!-- Messages rendered via JS -->
+          </div>
+
+          <!-- Chat Input Controls -->
+          <div class="ai-chat-input-row">
+            <input type="text" id="aiTechInput" class="form-input" placeholder="AI Texnologga savol bering (masalan: Futer 3-ipli uchun 122 razmerga qancha mato ketadi?)..." onkeydown="if(event.key==='Enter') app.sendAiChatMessage()">
+            <button class="btn btn-primary" id="btnSendAiTech" onclick="app.sendAiChatMessage()">
+              <span>🚀</span>
+              <span>Yuborish</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 14. VIEW: KORXONA / FACTORY FLOOR -->
+      <section class="app-view" id="view-korxona">
+        <div class="section-header-flex">
+          <div>
+            <h3 data-i18n="korxona_title">Tikuv Korxonasi — Ishchi Rejimi</h3>
+            <p style="font-size: 12.5px; color: var(--text-muted);" data-i18n="korxona_subtitle">Tikuvchilar va ustalarning operatsiyalarni real vaqtda belgilash ekrani</p>
+          </div>
+        </div>
+
+        <div class="floor-operator-card">
+          <div style="font-size: 14px; color: var(--text-muted);" data-i18n="korxona_operator">Tikuvchi: <strong>Malika Yusupova</strong></div>
+          <h2 style="font-size: 22px; margin: 12px 0;" id="floorCurrentOpTitle">Yeng va pastki ribana manjetlarini aylana tikish</h2>
+          <div style="font-size: 14px; color: #0284c7; font-weight: 600;">Model: K-025 Hoodie (4-ipli Overlock)</div>
+
+          <div class="floor-timer-display" id="floorStopwatchDisplay">00:48</div>
+
+          <div style="display: flex; gap: 12px; justify-content: center; margin-bottom: 24px;">
+            <button class="btn btn-outline" id="btnFloorTimerToggle">⏸️ Pauza / Boshlash</button>
+            <button class="btn btn-outline" id="btnFloorTimerReset">🔄 Qayta o'rnatish</button>
+          </div>
+
+          <button class="btn btn-success floor-btn-huge" id="btnFloorCompleteOp">
+            <span data-i18n="korxona_btn_complete">Operatsiya Bajarildi ✅ (+1 dona)</span>
+          </button>
+
+          <div style="margin-top: 24px; font-size: 13px; color: var(--text-muted);">
+            Bugun bajarildi: <strong id="floorTodayPiecesCount">48</strong> dona | O'rtacha vaqt: <strong>48 sek</strong>
+          </div>
+        </div>
+      </section>
+
+      <!-- 15. PRINT CONTAINER (FOR HIDDEN A4 PDF RENDERING) -->
+      <div id="printContainer" style="display: none;"></div>
+    </div>
+  </div>
+
+  <!-- MODALS -->
+  <!-- 1. CREATE NEW MODEL MODAL -->
+  <div class="modal-overlay" id="newModelModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 style="font-size: 18px;" data-i18n="btn_new_model">+ Yangi Model Yaratish</h3>
+        <button class="btn btn-outline btn-sm" onclick="app.closeModals()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label data-i18n="field_model_name">Model nomi</label>
+          <input type="text" class="form-input" id="nm_name" placeholder="Masalan: Kapyushonli Sport Tolstovka">
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div class="form-group">
+            <label data-i18n="field_model_code">Model kodi</label>
+            <input type="text" class="form-input" id="nm_code" placeholder="K-030">
+          </div>
+          <div class="form-group">
+            <label data-i18n="field_category">Kategoriya</label>
+            <select class="form-select" id="nm_category">
+              <option value="cat_hoodie">Hoodie / Tolstovka</option>
+              <option value="cat_pants">Sport Shim / Jogger</option>
+              <option value="cat_dress">Ko'ylak</option>
+              <option value="cat_polo">Polo Futbolka</option>
+              <option value="cat_jacket">Kurtka / Vetrovka</option>
+            </select>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div class="form-group">
+            <label data-i18n="field_gender">Jinsi</label>
+            <select class="form-select" id="nm_gender">
+              <option value="gender_girl">Qiz bola</option>
+              <option value="gender_boy">O'g'il bola</option>
+              <option value="gender_unisex">Unisex</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label data-i18n="field_age">Yosh guruhi</label>
+            <input type="text" class="form-input" id="nm_age" value="7–8 yosh">
+          </div>
+        </div>
+        <div class="form-group">
+          <label data-i18n="field_fabric">Asosiy mato</label>
+          <select class="form-select" id="nm_fabric">
+            <!-- Populated via JS -->
+          </select>
+        </div>
+        <div class="form-group">
+          <label data-i18n="field_description">Tavsif</label>
+          <textarea class="form-textarea" id="nm_description" placeholder="Modelning o'ziga xos detallari, bezaklar..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="app.closeModals()" data-i18n="btn_cancel">Bekor qilish</button>
+        <button class="btn btn-primary" onclick="app.saveNewModel()" data-i18n="btn_save">Saqlash</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PREMIUM VIP MODAL -->
+  <div class="modal-overlay" id="premiumVipModal">
+    <div class="modal-card modal-vip-luxury">
+      <div class="modal-header vip-modal-header">
+        <div class="vip-header-title">
+          <div class="vip-crown-badge">👑</div>
+          <div>
+            <h3>AI Kids Fashion & Production — PREMIUM VIP</h3>
+            <p class="vip-subtitle">Eksklyuziv Professional Imkoniyatlar & Korxona Ekologiyasi</p>
+          </div>
+        </div>
+        <button class="btn-close" onclick="app.closeModals()">✕</button>
+      </div>
+      <div class="modal-body vip-modal-body">
+        
+        <!-- Plan Switcher / Badges -->
+        <div class="vip-plans-grid">
+          <div class="vip-plan-card active" onclick="app.selectVipPlan('🌟 ATELIER PRO')">
+            <div class="plan-tag">TAVSIYA ETILADI</div>
+            <h4>🌟 ATELIER PRO</h4>
+            <div class="plan-price">99,000 <span>UZS / oy</span></div>
+            <ul class="vip-feature-list">
+              <li>✨ Cheksiz AI Dizayn & 4K Multi-perspektiva generatsiya</li>
+              <li>📐 Avtomat Lekalo Grading (92–152 sm) & DXF Eksport</li>
+              <li>✂️ Smart Nesting: Bichuvda 15% gacha mato tejamkorligi</li>
+              <li>📋 Professional White-Label Tech Pack (Brend logotipingiz bilan)</li>
+              <li>💰 Avtomatlashtirilgan ko'p bosqichli tannarx va marja hisobi</li>
+            </ul>
+          </div>
+          <div class="vip-plan-card" onclick="app.selectVipPlan('🏭 FACTORY ENTERPRISE')">
+            <div class="plan-tag gold">KORXONALAR UCHUN</div>
+            <h4>🏭 FACTORY ENTERPRISE</h4>
+            <div class="plan-price">299,000 <span>UZS / oy</span></div>
+            <ul class="vip-feature-list">
+              <li>🚀 Atelier Pro dagi barcha funksiyalar</li>
+              <li>🏭 Cheksiz Korxona ustalari va operatorlar mobil terminallari</li>
+              <li>📱 Real-vaqtda QR-kodli mahsulot va QC sifat nazorati</li>
+              <li>🤖 Shaxsiy AI Texnolog Muhandisi (24/7 Maslahatchi)</li>
+              <li>📊 Korxona rentabellik va ishlab chiqarish chuqur tahlili</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- PREMIUM ORDER / ARIZA TOPSHIRISH FORMASI -->
+        <div class="vip-order-form-card">
+          <div class="form-card-title">
+            <span>📝</span> <strong>PREMIUM TA'RIFGA ARIZA YUBORISH (TELEGRAM BOT)</strong>
+          </div>
+          <p class="form-card-subtitle">Ism, telefon raqamingizni kiriting va «Ariza Yuborish» tugmasini bosing — ma'lumotlar to'g'ridan-to'g'ri Telegram botingizga boradi.</p>
+
+          <form id="premiumApplicationForm" onsubmit="app.submitPremiumApplication(event)">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 14px;">
+              <div class="form-group">
+                <label for="prem_user_name">👤 Ism va Familiyangiz <span style="color:#ef4444">*</span></label>
+                <input type="text" id="prem_user_name" class="form-input" placeholder="Masalan: Sardor Rahimov" required>
+              </div>
+              <div class="form-group">
+                <label for="prem_user_phone">📞 Telefon raqamingiz <span style="color:#ef4444">* (+998 va 9 ta raqam)</span></label>
+                <input type="tel" id="prem_user_phone" class="form-input" value="+998 " placeholder="+998 (90) 123-45-67" maxlength="19" oninput="app.formatPhoneNumber(this)" onkeydown="app.handlePhoneKeyDown(event, this)" required>
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 14px;">
+              <div class="form-group">
+                <label for="prem_user_company">🏢 Korxona / Brend nomi</label>
+                <input type="text" id="prem_user_company" class="form-input" placeholder="Masalan: MiniStars Kids Wear">
+              </div>
+              <div class="form-group">
+                <label for="prem_user_plan">🌟 Tanlangan Tarif <span style="color:#ef4444">*</span></label>
+                <select id="prem_user_plan" class="form-select">
+                  <option value="🌟 Atelier Pro (99,000 UZS/oy)">🌟 Atelier Pro (99,000 UZS/oy)</option>
+                  <option value="🏭 Factory Enterprise (299,000 UZS/oy)">🏭 Factory Enterprise (299,000 UZS/oy)</option>
+                  <option value="💎 Maxsus Korxona Paketi (VIP)">💎 Maxsus Korxona Paketi (VIP)</option>
+                </select>
+              </div>
+            </div>
+
+            <div style="margin-top: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+              <div style="font-size: 12.5px; color: #64748b;">
+                ⏰ <b>Ariza topshirilgan vaqt:</b> <span id="prem_current_time_display" style="color: #0284c7; font-weight: 700;">Hozirgi vaqt</span>
+              </div>
+              <button type="submit" class="btn btn-premium-gold btn-lg" id="btnSubmitPremiumOrder">
+                <span>🚀 PREMIUM OLISH / ARIZANI YUBORISH</span>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Live Instant VIP Demo Activation Box -->
+        <div class="vip-activation-box">
+          <div class="vip-act-info">
+            <div class="act-title">👑 VIP PRO Rejimini Sinab Ko'rish</div>
+            <div class="act-desc">Dastur ichida VIP rejimini darhol yoqish yoki o'chirish</div>
+          </div>
+          <button class="btn btn-outline btn-sm" id="btnActivateVipToggle" onclick="app.toggleVipStatus()">
+            <span>✨ VIP REJIMNI FAOLLASHTIRISH</span>
+          </button>
+        </div>
+
+  <!-- NEW SEWING OPERATION MODAL -->
+  <div class="modal-overlay" id="newSewingOpModal">
+    <div class="modal-card" style="max-width: 540px;">
+      <div class="modal-header">
+        <h3 style="font-size: 17px; font-family: 'Fredoka', sans-serif;">🪡 Yangi Tikuv Texnologik Operatsiyasini Qo'shish</h3>
+        <button class="btn-close" onclick="app.closeModals()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Texnologik operatsiya nomi <span style="color: #ef4444;">*</span></label>
+          <input type="text" class="form-input" id="new_op_name" placeholder="Masalan: Kapyushon astarini biriktirib tikish" required>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+          <div class="form-group">
+            <label>Tegishli Bo'lim / Uzel</label>
+            <select class="form-select" id="new_op_section">
+              <option value="front">1. Old bo'lak uzeli</option>
+              <option value="back">2. Orqa bo'lak uzeli</option>
+              <option value="sleeve">3. Yeng uzeli</option>
+              <option value="hood">4. Kapyushon / Yoqa</option>
+              <option value="assembly" selected>5. Montaj yig'ish</option>
+              <option value="vto">6. VTO / Dazmollash</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Mashina / Uskuna turi</label>
+            <select class="form-select" id="new_op_machine">
+              <option value="4_overlock">Overlok 4-ipli (Trikotaj)</option>
+              <option value="coverstitch">Rasshivalka (3-ignali)</option>
+              <option value="lockstitch_301">1-ignali Universal (To'g'ri chok)</option>
+              <option value="3_overlock">Overlok 3-ipli (Bukish)</option>
+              <option value="buttonhole">Tugma / Petlya avtomati</option>
+              <option value="iron_vto">VTO Dazmol stoli / Press</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+          <div class="form-group">
+            <label>Vaqt me'yori (sekund) <span style="color: #ef4444;">*</span></label>
+            <input type="number" class="form-input" id="new_op_time" value="45" min="5" max="600" required>
+          </div>
+          <div class="form-group">
+            <label>Chok uzunligi (sm)</label>
+            <input type="number" class="form-input" id="new_op_seam" value="60" min="0" max="500">
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+          <div class="form-group">
+            <label>Operatsiya razryadi</label>
+            <select class="form-select" id="new_op_grade">
+              <option value="3">3-razryad (Oddiy)</option>
+              <option value="4" selected>4-razryad (O'rta)</option>
+              <option value="5">5-razryad (Murakkab / Mas'ul)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Tarif stavkasi (so'm/sek)</label>
+            <input type="number" class="form-input" id="new_op_rate" value="75" min="30" max="300">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="app.closeModals()">Bekor qilish</button>
+        <button class="btn btn-primary" onclick="app.saveNewSewingOp()">➕ Operatsiyani saqlash</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOATING AI CHAT WIDGET (BOTTOM-RIGHT) -->
+  <div class="floating-ai-widget" id="floatingAiWidget" onclick="app.toggleFloatingAiChat()">
+    <div class="floating-ai-icon">🤖</div>
+    <span class="floating-ai-text">AI Texnolog Chat</span>
+    <span class="floating-ai-badge">Online</span>
+  </div>
+
+  <!-- FLOATING AI CHAT POPUP DRAWER -->
+  <div class="floating-chat-drawer" id="floatingChatDrawer">
+    <div class="floating-chat-header">
+      <div class="ai-bot-avatar-badge" style="width: 38px; height: 38px; font-size: 20px;">🤖</div>
+      <div style="flex: 1;">
+        <h4 style="font-size: 14px; font-family: 'Fredoka', sans-serif; color: #1e1b4b; margin: 0;">AI Texnolog Maslahatchi</h4>
+        <div style="font-size: 11.5px; color: #15803d; font-weight: 600;">● Online 24/7</div>
+      </div>
+      <button class="btn-close" onclick="app.toggleFloatingAiChat()" style="font-size: 14px;">✕</button>
+    </div>
+    <div id="floatingChatMessages" class="floating-chat-body">
+      <!-- Synced with main chat -->
+    </div>
+    <div class="floating-chat-footer">
+      <input type="text" id="floatingChatInput" class="form-input" placeholder="Savolingizni yozing..." onkeydown="if(event.key==='Enter') app.sendFloatingAiMessage()">
+      <button class="btn btn-primary btn-sm" onclick="app.sendFloatingAiMessage()">🚀</button>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- SCRIPTS IN ORDER -->
+  <script src="js/i18n.js"></script>
+  <script src="js/database.js"></script>
+  <script src="js/aiDesigner.js"></script>
+  <script src="js/patternCad.js"></script>
+  <script src="js/cuttingCalculator.js"></script>
+  <script src="js/sewingCalculator.js"></script>
+  <script src="js/costingEngine.js"></script>
+  <script src="js/techPack.js"></script>
+  <script src="js/productionQc.js"></script>
+  <script src="js/aiTechnologist.js"></script>
+  <script src="js/aiChat.js"></script>
+  <script src="js/library.js"></script>
+  <script src="js/analytics.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
