@@ -154,10 +154,10 @@
         <div class="section-header-flex">
           <div>
             <h3 data-i18n="kpi_today_title">Bugungi ishlab chiqarish ko'rsatkichlari</h3>
-            <p style="font-size: 12.5px; color: var(--text-muted);">Real vaqt rejimida korxona quvvati va modellar holati</p>
+            <p style="font-size: 12.5px; color: var(--text-muted);">Real vaqt rejimida korxona quvvati va operatsiyalar holati</p>
           </div>
           <div style="display: flex; gap: 8px;">
-            <button class="btn btn-outline btn-sm" onclick="app.navigateTo('designer')">🎨 AI Dizayn</button>
+            <button class="btn btn-outline btn-sm" onclick="app.navigateTo('models')">👗 Modellar bo'limi</button>
             <button class="btn btn-primary btn-sm" onclick="app.navigateTo('ai-technologist')">🤖 AI Texnolog</button>
           </div>
         </div>
@@ -208,34 +208,48 @@
           </div>
         </div>
 
-        <!-- ACTIVE SELECTED MODEL CONTROL CENTER HERO -->
-        <div id="dashboardActiveModelHero" style="margin-bottom: 24px;">
-          <!-- Rendered dynamically via JS based on selectedModelId -->
-        </div>
-
-        <!-- RECENT MODELS SECTION -->
-        <div class="section-header-flex" style="margin-top: 10px;">
-          <div>
-            <h3 data-i18n="recent_models_title">Modellar katalogi va tanlash</h3>
-            <p style="font-size: 12px; color: var(--text-muted);">Kerakli modelni tanlang — butun tizim (bichuv, lekalo, tikuv, tannarx) shu modelga moslashadi</p>
+        <!-- DASHBOARD WORKFLOW SHORTCUTS -->
+        <div class="dashboard-shortcuts-grid" style="margin-top: 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
+          <div class="shortcut-card" onclick="app.navigateTo('models')" style="background: rgba(255,255,255,0.92); border: 1.5px solid #e2e8f0; border-radius: 16px; padding: 20px; cursor: pointer; transition: all 0.2s ease; box-shadow: var(--shadow-md);">
+            <div style="font-size: 28px; margin-bottom: 10px;">👗</div>
+            <h4 style="font-size: 15px; margin-bottom: 4px; color: #1e1b4b;">Modellar Katalogi</h4>
+            <p style="font-size: 12.5px; color: var(--text-muted); margin: 0;">Barcha modellar ro'yxati, 3-tomonlama ko'rinish va texnik tafsilotlar</p>
           </div>
-          <button class="btn btn-outline btn-sm" onclick="app.navigateTo('models')">
-            <span>👗 Barcha modellar</span>
-          </button>
+          <div class="shortcut-card" onclick="app.navigateTo('designer')" style="background: rgba(255,255,255,0.92); border: 1.5px solid #e2e8f0; border-radius: 16px; padding: 20px; cursor: pointer; transition: all 0.2s ease; box-shadow: var(--shadow-md);">
+            <div style="font-size: 28px; margin-bottom: 10px;">🎨</div>
+            <h4 style="font-size: 15px; margin-bottom: 4px; color: #1e1b4b;">AI Dizayn Generator</h4>
+            <p style="font-size: 12.5px; color: var(--text-muted); margin: 0;">Matnli tavsifdan yangi 2D/3D kiyim konseptlari yaratish</p>
+          </div>
+          <div class="shortcut-card" onclick="app.navigateTo('cad')" style="background: rgba(255,255,255,0.92); border: 1.5px solid #e2e8f0; border-radius: 16px; padding: 20px; cursor: pointer; transition: all 0.2s ease; box-shadow: var(--shadow-md);">
+            <div style="font-size: 28px; margin-bottom: 10px;">📐</div>
+            <h4 style="font-size: 15px; margin-bottom: 4px; color: #1e1b4b;">Lekalo Konstruktori</h4>
+            <p style="font-size: 12.5px; color: var(--text-muted); margin: 0;">Avtomatik grading, o'lchamlar va SVG/DXF eksport</p>
+          </div>
+          <div class="shortcut-card" onclick="app.navigateTo('cutting')" style="background: rgba(255,255,255,0.92); border: 1.5px solid #e2e8f0; border-radius: 16px; padding: 20px; cursor: pointer; transition: all 0.2s ease; box-shadow: var(--shadow-md);">
+            <div style="font-size: 28px; margin-bottom: 10px;">✂️</div>
+            <h4 style="font-size: 15px; margin-bottom: 4px; color: #1e1b4b;">Bichuv va Sarf</h4>
+            <p style="font-size: 12.5px; color: var(--text-muted); margin: 0;">Mato eni, unumdorlik va qatlamlar bo'yicha aniq sarf hisobi</p>
+          </div>
+          <div class="shortcut-card" onclick="app.navigateTo('costing')" style="background: rgba(255,255,255,0.92); border: 1.5px solid #e2e8f0; border-radius: 16px; padding: 20px; cursor: pointer; transition: all 0.2s ease; box-shadow: var(--shadow-md);">
+            <div style="font-size: 28px; margin-bottom: 10px;">💰</div>
+            <h4 style="font-size: 15px; margin-bottom: 4px; color: #1e1b4b;">Tannarx Kalkulyatori</h4>
+            <p style="font-size: 12.5px; color: var(--text-muted); margin: 0;">Xomashyo, ish haqi, ustama xarajatlar va foyda marjasi</p>
+          </div>
+          <div class="shortcut-card" onclick="app.navigateTo('korxona')" style="background: rgba(255,255,255,0.92); border: 1.5px solid #e2e8f0; border-radius: 16px; padding: 20px; cursor: pointer; transition: all 0.2s ease; box-shadow: var(--shadow-md);">
+            <div style="font-size: 28px; margin-bottom: 10px;">🏭</div>
+            <h4 style="font-size: 15px; margin-bottom: 4px; color: #1e1b4b;">Korxona / Mobil Rejim</h4>
+            <p style="font-size: 12.5px; color: var(--text-muted); margin: 0;">Tikuv sexi uchun planshet/mobil boshqaruv va xronometraj</p>
+          </div>
         </div>
 
-        <div class="models-grid" id="dashboardModelsGrid">
-          <!-- Rendered via JS -->
-        </div>
-
-        <!-- DASHBOARD BOTTOM AI ASSISTANT BANNER (BOTTOM-LEFT) -->
-        <div style="margin-top: 24px; display: grid; grid-template-columns: 1fr; max-width: 540px;">
-          <div style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); border: 1.5px solid #bae6fd; border-radius: 16px; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 14px; box-shadow: 0 4px 14px rgba(2, 132, 199, 0.08);">
-            <div style="display: flex; align-items: center; gap: 12px;">
-              <div style="width: 42px; height: 42px; border-radius: 12px; background: linear-gradient(135deg, #0284c7, #38bdf8); display: flex; align-items: center; justify-content: center; font-size: 22px; color: #fff; box-shadow: 0 4px 10px rgba(2, 132, 199, 0.3);">🤖</div>
+        <!-- DASHBOARD BOTTOM AI ASSISTANT BANNER -->
+        <div style="margin-top: 24px; display: grid; grid-template-columns: 1fr; max-width: 580px;">
+          <div style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); border: 1.5px solid #bae6fd; border-radius: 16px; padding: 18px 22px; display: flex; align-items: center; justify-content: space-between; gap: 14px; box-shadow: 0 4px 14px rgba(2, 132, 199, 0.08);">
+            <div style="display: flex; align-items: center; gap: 14px;">
+              <div style="width: 44px; height: 44px; border-radius: 14px; background: linear-gradient(135deg, #0284c7, #38bdf8); display: flex; align-items: center; justify-content: center; font-size: 24px; color: #fff; box-shadow: 0 4px 10px rgba(2, 132, 199, 0.3);">🤖</div>
               <div>
-                <h4 style="font-size: 14.5px; color: #1e1b4b; margin: 0 0 2px 0; font-family: 'Fredoka', sans-serif;">AI Texnolog Maslahatchi</h4>
-                <p style="font-size: 12px; color: #64748b; margin: 0;">Mato sarfi, lekalo va tannarx bo'yicha tezkor yordam</p>
+                <h4 style="font-size: 15px; color: #1e1b4b; margin: 0 0 2px 0; font-family: 'Fredoka', sans-serif;">AI Texnolog Maslahatchi</h4>
+                <p style="font-size: 12px; color: #64748b; margin: 0;">Mato sarfi, lekalo, tikuv ketma-ketligi va tannarx bo'yicha yordam</p>
               </div>
             </div>
             <button class="btn btn-primary btn-sm" onclick="app.toggleFloatingAiChat()" style="white-space: nowrap;">
@@ -249,8 +263,8 @@
       <section class="app-view" id="view-models">
         <div class="section-header-flex">
           <div>
-            <h3 data-i18n="nav_models">Modellar Boshqaruvi</h3>
-            <p style="font-size: 12.5px; color: var(--text-muted);">Barcha bolalar kiyimi modellari, o'lchamlari va tannarxi</p>
+            <h3 data-i18n="nav_models">Modellar Boshqaruvi va Katalogi</h3>
+            <p style="font-size: 12.5px; color: var(--text-muted);">Barcha bolalar kiyimi modellari, 3-tomonlama ko'rinish va texnik ko'rsatkichlar</p>
           </div>
           <button class="btn btn-accent btn-sm" onclick="app.openNewModelModal()">
             <span>➕</span>
@@ -258,13 +272,31 @@
           </button>
         </div>
 
+        <!-- MODEL SEARCH & CATEGORY FILTERS (EXCLUSIVE TO MODELS VIEW) -->
+        <div class="models-filter-bar" style="background: rgba(255,255,255,0.92); border: 1.5px solid #e2e8f0; border-radius: 16px; padding: 16px 20px; margin-bottom: 22px; box-shadow: var(--shadow-sm);">
+          <div style="display: flex; gap: 14px; flex-wrap: wrap; align-items: center; justify-content: space-between;">
+            <div style="flex: 1; min-width: 260px; position: relative;">
+              <span style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 16px; opacity: 0.6;">🔍</span>
+              <input type="text" id="modelSearchInput" class="form-input" placeholder="Model kodi, nomi yoki matosi bo'yicha qidirish..." style="padding-left: 42px; width: 100%;">
+            </div>
+            <div class="model-category-chips" id="modelCategoryChips" style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <button class="btn btn-sm btn-outline active" data-category="all">✨ Barchasi</button>
+              <button class="btn btn-sm btn-outline" data-category="cat_hoodie">🧥 Hoodie</button>
+              <button class="btn btn-sm btn-outline" data-category="cat_pants">👖 Shim</button>
+              <button class="btn btn-sm btn-outline" data-category="cat_dress">👗 Ko'ylak</button>
+              <button class="btn btn-sm btn-outline" data-category="cat_polo">👕 Polo</button>
+              <button class="btn btn-sm btn-outline" data-category="cat_jacket">🧥 Kurtka</button>
+            </div>
+          </div>
+        </div>
+
         <div class="models-grid" id="allModelsGrid">
           <!-- Rendered via JS -->
         </div>
 
-        <!-- SELECTED MODEL VISUAL PICTURES SHOWCASE (PASTKI RASMLAR BO'LIMI) -->
+        <!-- SELECTED MODEL 3-VIEW VISUAL PICTURES & TECH SHOWCASE -->
         <div class="selected-model-bottom-showcase" id="selectedModelBottomShowcase">
-          <!-- Dynamically populated on model click -->
+          <!-- Dynamically populated on model click with Front, Back, Side views -->
         </div>
       </section>
 

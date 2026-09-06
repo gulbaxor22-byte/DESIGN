@@ -59,14 +59,39 @@ class AppController {
       });
     });
 
-    // Global Search with debounce
-    const searchInput = document.getElementById('globalSearchInput');
-    if (searchInput) {
-      const debouncedFilter = this.debounce((val) => this.filterModels(val), 150);
-      searchInput.addEventListener('input', (e) => {
+    // Global Search & Model Search with debounce
+    const globalSearchInput = document.getElementById('globalSearchInput');
+    if (globalSearchInput) {
+      const debouncedFilter = this.debounce((val) => {
+        this.modelSearchQuery = val;
+        if (this.currentView === 'models') this.renderAllModels();
+      }, 150);
+      globalSearchInput.addEventListener('input', (e) => {
         debouncedFilter(e.target.value);
       });
     }
+
+    // Models View Dedicated Search Input
+    const modelSearchInput = document.getElementById('modelSearchInput');
+    if (modelSearchInput) {
+      const debouncedModelFilter = this.debounce((val) => {
+        this.modelSearchQuery = val;
+        this.renderAllModels();
+      }, 150);
+      modelSearchInput.addEventListener('input', (e) => {
+        debouncedModelFilter(e.target.value);
+      });
+    }
+
+    // Models Category Chips
+    document.querySelectorAll('#modelCategoryChips button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#modelCategoryChips button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        this.modelActiveCategory = btn.getAttribute('data-category') || 'all';
+        this.renderAllModels();
+      });
+    });
 
     // Top Model Selector
     const modelSelector = document.getElementById('topModelSelector');
@@ -440,7 +465,7 @@ class AppController {
     `;
   }
 
-  // Dashboard Renderer
+  // Dashboard Renderer (Clean KPI & Production Focus)
   renderDashboard() {
     const models = db.getModels();
     const readyCount = models.filter(m => m.status === 'ready').length;
@@ -449,28 +474,57 @@ class AppController {
     const sewingCount = models.filter(m => m.status === 'sewing').length;
     const materialsCount = db.getMaterials().length;
 
-    document.getElementById('kpiNewModels').textContent = models.length;
-    document.getElementById('kpiInProduction').textContent = prodCount;
-    document.getElementById('kpiReadyModels').textContent = readyCount;
-    document.getElementById('kpiMaterials').textContent = materialsCount;
-    document.getElementById('kpiInCutting').textContent = cuttingCount;
-    document.getElementById('kpiInSewing').textContent = sewingCount;
-    document.getElementById('sidebarModelCount').textContent = models.length;
-
-    this.renderDashboardActiveModelHero();
-
-    const grid = document.getElementById('dashboardModelsGrid');
-    if (grid) {
-      grid.innerHTML = models.map(m => this.renderModelCardHtml(m)).join('');
-    }
+    const elNew = document.getElementById('kpiNewModels');
+    if (elNew) elNew.textContent = models.length;
+    const elProd = document.getElementById('kpiInProduction');
+    if (elProd) elProd.textContent = prodCount;
+    const elReady = document.getElementById('kpiReadyModels');
+    if (elReady) elReady.textContent = readyCount;
+    const elMat = document.getElementById('kpiMaterials');
+    if (elMat) elMat.textContent = materialsCount;
+    const elCut = document.getElementById('kpiInCutting');
+    if (elCut) elCut.textContent = cuttingCount;
+    const elSew = document.getElementById('kpiInSewing');
+    if (elSew) elSew.textContent = sewingCount;
+    const elBadge = document.getElementById('sidebarModelCount');
+    if (elBadge) elBadge.textContent = models.length;
   }
 
+  // Models Catalog Renderer (With Search & Category Filtering)
   renderAllModels() {
     const grid = document.getElementById('allModelsGrid');
-    if (grid) {
-      const models = db.getModels();
+    if (!grid) return;
+
+    let models = db.getModels();
+
+    // Category Filter
+    if (this.modelActiveCategory && this.modelActiveCategory !== 'all') {
+      models = models.filter(m => m.category === this.modelActiveCategory);
+    }
+
+    // Search Query Filter
+    if (this.modelSearchQuery && this.modelSearchQuery.trim() !== '') {
+      const q = this.modelSearchQuery.toLowerCase().trim();
+      models = models.filter(m => 
+        (m.code && m.code.toLowerCase().includes(q)) ||
+        (m.name && m.name.toLowerCase().includes(q)) ||
+        (m.fabricName && m.fabricName.toLowerCase().includes(q)) ||
+        (m.description && m.description.toLowerCase().includes(q))
+      );
+    }
+
+    if (models.length === 0) {
+      grid.innerHTML = `
+        <div style="grid-column: 1 / -1; text-align: center; padding: 40px; background: rgba(255,255,255,0.85); border-radius: 16px; border: 1.5px dashed #cbd5e1;">
+          <div style="font-size: 36px; margin-bottom: 8px;">🔍</div>
+          <h4 style="color: #1e1b4b; margin-bottom: 4px;">Hech qanday model topilmadi</h4>
+          <p style="color: #64748b; font-size: 13px;">Qidiruv so'zini o'zgartiring yoki boshqa toifani tanlang.</p>
+        </div>
+      `;
+    } else {
       grid.innerHTML = models.map(m => this.renderModelCardHtml(m)).join('');
     }
+
     this.renderBottomModelShowcase(this.selectedModelId);
   }
 
