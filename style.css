@@ -1,7 +1,5 @@
 /* style.css - Modern Kids Fashion & Production Design System with Playful Typography & Pastel Sketches */
 
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;600;700&family=Fira+Code:wght@400;500;600;700&family=Fredoka:wght@500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Quicksand:wght@500;600;700&display=swap');
-
 :root {
   /* Fresh & Vibrant Multi-Tone Pastel Palette */
   --bg-main: #fcfbf9;
@@ -54,6 +52,9 @@
   --radius-md: 16px;
   --radius-lg: 20px;
   --radius-xl: 28px;
+
+  /* Shared Optimized Fashion Sketch Pattern */
+  --bg-sketch-pattern: url("data:image/svg+xml,%3Csvg width='340' height='340' viewBox='0 0 340 340' xmlns='http://www.w3.org/2000/svg'%3E%3Cg opacity='0.85'%3E%3Cg transform='rotate(24, 45, 50)'%3E%3Cpath d='M30,25 L60,25 L75,75 Q45,82 15,75 Z' fill='%23fce7f3' stroke='%23ec4899' stroke-width='2.2' stroke-linejoin='round'/%3E%3Cpath d='M30,25 Q45,35 60,25' stroke='%23db2777' stroke-width='2' fill='%23ffffff'/%3E%3Ccircle cx='45' cy='45' r='3.5' fill='%23f43f5e'/%3E%3C/g%3E%3Cg transform='rotate(-28, 155, 45)'%3E%3Cpath d='M140,25 Q125,10 155,5 Q185,10 170,25 L185,70 L125,70 Z' fill='%23e0f2fe' stroke='%230284c7' stroke-width='2.2' stroke-linejoin='round'/%3E%3Cpath d='M135,50 L175,50 L180,68 L130,68 Z' fill='%23bae6fd' stroke='%230369a1' stroke-width='1.5'/%3E%3C/g%3E%3Cg transform='rotate(38, 260, 45)'%3E%3Cpath d='M245,20 Q260,15 275,20 L282,45 Q272,58 260,50 Q248,58 238,45 Z' fill='%23fef08a' stroke='%23eab308' stroke-width='2.2' stroke-linejoin='round'/%3E%3C/g%3E%3Cg transform='rotate(-45, 45, 150)'%3E%3Ccircle cx='35' cy='160' r='7' fill='%23d1fae5' stroke='%23059669' stroke-width='2'/%3E%3Ccircle cx='51' cy='160' r='7' fill='%23d1fae5' stroke='%23059669' stroke-width='2'/%3E%3Cline x1='41' y1='154' x2='61' y2='130' stroke='%2364748b' stroke-width='2.5' stroke-linecap='round'/%3E%3C/g%3E%3Cg transform='rotate(30, 150, 140)'%3E%3Crect x='135' y='125' width='28' height='36' rx='4' fill='%23f3e8ff' stroke='%239333ea' stroke-width='2.2'/%3E%3C/g%3E%3Cg transform='rotate(-22, 260, 150)'%3E%3Cpath d='M235,125 L285,125 L292,180 L272,180 L260,145 L248,180 L228,180 Z' fill='%23ffe4e6' stroke='%23f43f5e' stroke-width='2.2' stroke-linejoin='round'/%3E%3C/g%3E%3Cg transform='rotate(25, 260, 250)'%3E%3Cpath d='M250,235 Q250,227 257,227 Q264,227 264,235 L285,250 L230,250 Z' fill='%23fef3c7' stroke='%23d97706' stroke-width='2.2' stroke-linejoin='round'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
 * {
@@ -62,159 +63,135 @@
   box-sizing: border-box;
 }
 
-/* BACKGROUND WITH MULTIDIRECTIONAL ROTATED DOODLE SKETCHES */
+/* BACKGROUND WITH VIBRANT PASTEL WASH */
 body {
-  font-family: 'Plus Jakarta Sans', 'Quicksand', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   color: var(--text-main);
   min-height: 100vh;
   display: flex;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
-  transition: background 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-
-  /* Default Vibrant Multi-Color Pastel Base + Rotated Sketches */
   background-color: #fef7f9;
   background-image: 
-    /* 1. Multidirectional Rotated Kids Fashion Sketches Pattern */
-    url("data:image/svg+xml,%3Csvg width='340' height='340' viewBox='0 0 340 340' xmlns='http://www.w3.org/2000/svg'%3E%3Cg opacity='0.85'%3E%3C!-- 1. Pink Party Dress (Tilted 24 deg) --%3E%3Cg transform='rotate(24, 45, 50)'%3E%3Cpath d='M30,25 L60,25 L75,75 Q45,82 15,75 Z' fill='%23fce7f3' stroke='%23ec4899' stroke-width='2.2' stroke-linejoin='round'/%3E%3Cpath d='M30,25 Q45,35 60,25' stroke='%23db2777' stroke-width='2' fill='%23ffffff'/%3E%3Ccircle cx='45' cy='45' r='3.5' fill='%23f43f5e'/%3E%3C/g%3E%3C!-- 2. Sky Blue Hoodie (Tilted -28 deg) --%3E%3Cg transform='rotate(-28, 155, 45)'%3E%3Cpath d='M140,25 Q125,10 155,5 Q185,10 170,25 L185,70 L125,70 Z' fill='%23e0f2fe' stroke='%230284c7' stroke-width='2.2' stroke-linejoin='round'/%3E%3Cpath d='M135,50 L175,50 L180,68 L130,68 Z' fill='%23bae6fd' stroke='%230369a1' stroke-width='1.5'/%3E%3Cline x1='148' y1='25' x2='145' y2='45' stroke='%23f43f5e' stroke-width='2' stroke-linecap='round'/%3E%3Cline x1='162' y1='25' x2='165' y2='45' stroke='%23f43f5e' stroke-width='2' stroke-linecap='round'/%3E%3C/g%3E%3C!-- 3. Sunshine Yellow Baby Romper (Tilted 38 deg) --%3E%3Cg transform='rotate(38, 260, 45)'%3E%3Cpath d='M245,20 Q260,15 275,20 L282,45 Q272,58 260,50 Q248,58 238,45 Z' fill='%23fef08a' stroke='%23eab308' stroke-width='2.2' stroke-linejoin='round'/%3E%3Ccircle cx='260' cy='30' r='2' fill='%23ea580c'/%3E%3Ccircle cx='260' cy='38' r='2' fill='%23ea580c'/%3E%3C/g%3E%3C!-- 4. Mint Green Scissors (Tilted -45 deg) --%3E%3Cg transform='rotate(-45, 45, 150)'%3E%3Ccircle cx='35' cy='160' r='7' fill='%23d1fae5' stroke='%23059669' stroke-width='2'/%3E%3Ccircle cx='51' cy='160' r='7' fill='%23d1fae5' stroke='%23059669' stroke-width='2'/%3E%3Cline x1='41' y1='154' x2='61' y2='130' stroke='%2364748b' stroke-width='2.5' stroke-linecap='round'/%3E%3Cline x1='45' y1='154' x2='25' y2='130' stroke='%2364748b' stroke-width='2.5' stroke-linecap='round'/%3E%3C/g%3E%3C!-- 5. Lilac Thread Spool (Tilted 30 deg) --%3E%3Cg transform='rotate(30, 150, 140)'%3E%3Crect x='135' y='125' width='28' height='36' rx='4' fill='%23f3e8ff' stroke='%239333ea' stroke-width='2.2'/%3E%3Cline x1='135' y1='134' x2='163' y2='134' stroke='%23a855f7' stroke-width='2'/%3E%3Cline x1='135' y1='142' x2='163' y2='142' stroke='%23a855f7' stroke-width='2'/%3E%3Cline x1='135' y1='150' x2='163' y2='150' stroke='%23a855f7' stroke-width='2'/%3E%3C/g%3E%3C!-- 6. Coral Kids Pants (Tilted -22 deg) --%3E%3Cg transform='rotate(-22, 260, 150)'%3E%3Cpath d='M235,125 L285,125 L292,180 L272,180 L260,145 L248,180 L228,180 Z' fill='%23ffe4e6' stroke='%23f43f5e' stroke-width='2.2' stroke-linejoin='round'/%3E%3Cline x1='235' y1='134' x2='285' y2='134' stroke='%23e11d48' stroke-width='1.5' stroke-dasharray='3,2'/%3E%3C/g%3E%3C!-- 7. Colorful Candy Buttons & Socks (Tilted 50 deg) --%3E%3Cg transform='rotate(50, 50, 250)'%3E%3Ccircle cx='50' cy='250' r='12' fill='%23fce7f3' stroke='%23ec4899' stroke-width='2.2'/%3E%3Ccircle cx='46' cy='246' r='1.5' fill='%23be185d'/%3E%3Ccircle cx='54' cy='246' r='1.5' fill='%23be185d'/%3E%3Ccircle cx='46' cy='254' r='1.5' fill='%23be185d'/%3E%3Ccircle cx='54' cy='254' r='1.5' fill='%23be185d'/%3E%3C/g%3E%3Cg transform='rotate(-35, 150, 250)'%3E%3Ccircle cx='150' cy='250' r='11' fill='%23cffafe' stroke='%230891b2' stroke-width='2.2'/%3E%3Ccircle cx='147' cy='247' r='1.5' fill='%230e7490'/%3E%3Ccircle cx='153' cy='247' r='1.5' fill='%230e7490'/%3E%3Ccircle cx='147' cy='253' r='1.5' fill='%230e7490'/%3E%3Ccircle cx='153' cy='253' r='1.5' fill='%230e7490'/%3E%3C/g%3E%3C!-- 8. Golden Hanger with Stars (Tilted 25 deg) --%3E%3Cg transform='rotate(25, 260, 250)'%3E%3Cpath d='M250,235 Q250,227 257,227 Q264,227 264,235 L285,250 L230,250 Z' fill='%23fef3c7' stroke='%23d97706' stroke-width='2.2' stroke-linejoin='round'/%3E%3Cpolygon points='257,257 259,262 264,263 260,266 261,271 257,268 253,271 254,266 250,263 255,262' fill='%23f59e0b'/%3E%3C/g%3E%3C!-- 9. Tape Measure Doodles --%3E%3Cg transform='rotate(-15, 95, 190)'%3E%3Cpath d='M80,185 L110,185 L110,200 L80,200 Z' fill='%23fed7aa' stroke='%23ea580c' stroke-width='1.8'/%3E%3Cline x1='87' y1='185' x2='87' y2='192' stroke='%23ea580c' stroke-width='1.5'/%3E%3Cline x1='95' y1='185' x2='95' y2='192' stroke='%23ea580c' stroke-width='1.5'/%3E%3Cline x1='103' y1='185' x2='103' y2='192' stroke='%23ea580c' stroke-width='1.5'/%3E%3C/g%3E%3C!-- 10. Little Stars & Sparkles --%3E%3Cpath d='M95,45 L97,51 L103,53 L97,55 L95,61 L93,55 L87,53 L93,51 Z' fill='%23ec4899'/%3E%3Cpath d='M210,95 L211.5,99.5 L216,101 L211.5,102.5 L210,107 L208.5,102.5 L204,101 L208.5,99.5 Z' fill='%230284c7'/%3E%3Cpath d='M200,285 L202,290 L207,292 L202,294 L200,299 L198,294 L193,292 L198,290 Z' fill='%2310b981'/%3E%3C/g%3E%3C/svg%3E"),
-    /* 2. Colorful Ambient Mesh Radial Gradients */
+    var(--bg-sketch-pattern),
     radial-gradient(circle at 10% 15%, rgba(244, 114, 182, 0.35) 0%, transparent 42%),
     radial-gradient(circle at 90% 20%, rgba(56, 189, 248, 0.38) 0%, transparent 45%),
     radial-gradient(circle at 35% 65%, rgba(52, 211, 153, 0.32) 0%, transparent 45%),
     radial-gradient(circle at 85% 80%, rgba(251, 191, 36, 0.35) 0%, transparent 45%),
-    radial-gradient(circle at 50% 30%, rgba(192, 132, 252, 0.30) 0%, transparent 50%),
-    /* 3. Base Rich Pastel Wash */
     linear-gradient(135deg, #fff1f2 0%, #f5f3ff 25%, #e0f2fe 50%, #ecfdf5 75%, #fefce8 100%);
   background-attachment: fixed;
+  transition: background-color 0.4s ease;
 }
 
-/* ================== SECTION-SPECIFIC COLOR THEMES ================== */
+/* SECTION-SPECIFIC FAST THEMES */
 body.theme-dashboard {
   background-image: 
-    url("data:image/svg+xml,%3Csvg width='340' height='340' viewBox='0 0 340 340' xmlns='http://www.w3.org/2000/svg'%3E%3Cg opacity='0.85'%3E%3Cg transform='rotate(24, 45, 50)'%3E%3Cpath d='M30,25 L60,25 L75,75 Q45,82 15,75 Z' fill='%23fce7f3' stroke='%23ec4899' stroke-width='2.2'/%3E%3C/g%3E%3Cg transform='rotate(-28, 155, 45)'%3E%3Cpath d='M140,25 Q125,10 155,5 Q185,10 170,25 L185,70 L125,70 Z' fill='%23e0f2fe' stroke='%230284c7' stroke-width='2.2'/%3E%3C/g%3E%3Cg transform='rotate(38, 260, 45)'%3E%3Cpath d='M245,20 Q260,15 275,20 L282,45 Q272,58 260,50 Q248,58 238,45 Z' fill='%23fef08a' stroke='%23eab308' stroke-width='2.2'/%3E%3C/g%3E%3Cg transform='rotate(-45, 45, 150)'%3E%3Ccircle cx='35' cy='160' r='7' fill='%23d1fae5' stroke='%23059669' stroke-width='2'/%3E%3Ccircle cx='51' cy='160' r='7' fill='%23d1fae5' stroke='%23059669' stroke-width='2'/%3E%3Cline x1='41' y1='154' x2='61' y2='130' stroke='%2364748b' stroke-width='2.5'/%3E%3Cline x1='45' y1='154' x2='25' y2='130' stroke='%2364748b' stroke-width='2.5'/%3E%3C/g%3E%3Cg transform='rotate(30, 150, 140)'%3E%3Crect x='135' y='125' width='28' height='36' rx='4' fill='%23f3e8ff' stroke='%239333ea' stroke-width='2.2'/%3E%3C/g%3E%3Cg transform='rotate(-22, 260, 150)'%3E%3Cpath d='M235,125 L285,125 L292,180 L272,180 L260,145 L248,180 L228,180 Z' fill='%23ffe4e6' stroke='%23f43f5e' stroke-width='2.2'/%3E%3C/g%3E%3Cg transform='rotate(25, 260, 250)'%3E%3Cpath d='M250,235 Q250,227 257,227 Q264,227 264,235 L285,250 L230,250 Z' fill='%23fef3c7' stroke='%23d97706' stroke-width='2.2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+    var(--bg-sketch-pattern),
     radial-gradient(circle at 10% 15%, rgba(244, 114, 182, 0.38) 0%, transparent 42%),
     radial-gradient(circle at 90% 20%, rgba(56, 189, 248, 0.40) 0%, transparent 45%),
     radial-gradient(circle at 35% 65%, rgba(52, 211, 153, 0.35) 0%, transparent 45%),
-    radial-gradient(circle at 85% 80%, rgba(251, 191, 36, 0.38) 0%, transparent 45%),
     linear-gradient(135deg, #fff1f2 0%, #f5f3ff 25%, #e0f2fe 50%, #ecfdf5 75%, #fefce8 100%);
 }
 
 body.theme-models {
-  /* Sweet Couture Rose & Pink Theme */
   background-image: 
-    url("data:image/svg+xml,%3Csvg width='340' height='340' viewBox='0 0 340 340' xmlns='http://www.w3.org/2000/svg'%3E%3Cg opacity='0.85'%3E%3Cg transform='rotate(24, 45, 50)'%3E%3Cpath d='M30,25 L60,25 L75,75 Q45,82 15,75 Z' fill='%23fce7f3' stroke='%23ec4899' stroke-width='2.2'/%3E%3C/g%3E%3Cg transform='rotate(-28, 155, 45)'%3E%3Cpath d='M140,25 Q125,10 155,5 Q185,10 170,25 L185,70 L125,70 Z' fill='%23e0f2fe' stroke='%230284c7' stroke-width='2.2'/%3E%3C/g%3E%3Cg transform='rotate(38, 260, 45)'%3E%3Cpath d='M245,20 Q260,15 275,20 L282,45 Q272,58 260,50 Q248,58 238,45 Z' fill='%23fef08a' stroke='%23eab308' stroke-width='2.2'/%3E%3C/g%3E%3Cg transform='rotate(25, 260, 250)'%3E%3Cpath d='M250,235 Q250,227 257,227 Q264,227 264,235 L285,250 L230,250 Z' fill='%23fef3c7' stroke='%23d97706' stroke-width='2.2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+    var(--bg-sketch-pattern),
     radial-gradient(circle at 15% 20%, rgba(244, 63, 94, 0.42) 0%, transparent 45%),
     radial-gradient(circle at 85% 75%, rgba(236, 72, 153, 0.42) 0%, transparent 45%),
-    radial-gradient(circle at 50% 30%, rgba(251, 146, 60, 0.30) 0%, transparent 45%),
     linear-gradient(135deg, #fff1f2 0%, #fce7f3 50%, #ffe4e6 100%);
 }
 
 body.theme-designer {
-  /* Electric Creative Neon-Pastel Spectrum */
   background-image: 
-    url("data:image/svg+xml,%3Csvg width='340' height='340' viewBox='0 0 340 340' xmlns='http://www.w3.org/2000/svg'%3E%3Cg opacity='0.85'%3E%3Cg transform='rotate(24, 45, 50)'%3E%3Cpath d='M30,25 L60,25 L75,75 Q45,82 15,75 Z' fill='%23fce7f3' stroke='%23ec4899' stroke-width='2.2'/%3E%3C/g%3E%3Cg transform='rotate(-28, 155, 45)'%3E%3Cpath d='M140,25 Q125,10 155,5 Q185,10 170,25 L185,70 L125,70 Z' fill='%23e0f2fe' stroke='%230284c7' stroke-width='2.2'/%3E%3C/g%3E%3Cg transform='rotate(30, 150, 140)'%3E%3Crect x='135' y='125' width='28' height='36' rx='4' fill='%23f3e8ff' stroke='%239333ea' stroke-width='2.2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+    var(--bg-sketch-pattern),
     radial-gradient(circle at 20% 25%, rgba(168, 85, 247, 0.45) 0%, transparent 48%),
     radial-gradient(circle at 80% 30%, rgba(236, 72, 153, 0.45) 0%, transparent 48%),
-    radial-gradient(circle at 50% 80%, rgba(6, 182, 212, 0.42) 0%, transparent 48%),
     linear-gradient(135deg, #faf5ff 0%, #fdf2f8 50%, #ecfeff 100%);
 }
 
 body.theme-cad {
-  /* Precision CAD Cyan & Indigo */
   background-image: 
-    url("data:image/svg+xml,%3Csvg width='340' height='340' viewBox='0 0 340 340' xmlns='http://www.w3.org/2000/svg'%3E%3Cg opacity='0.85'%3E%3Cg transform='rotate(-28, 155, 45)'%3E%3Cpath d='M140,25 Q125,10 155,5 Q185,10 170,25 L185,70 L125,70 Z' fill='%23e0f2fe' stroke='%230284c7' stroke-width='2.2'/%3E%3C/g%3E%3Cg transform='rotate(-45, 45, 150)'%3E%3Ccircle cx='35' cy='160' r='7' fill='%23d1fae5' stroke='%23059669' stroke-width='2'/%3E%3Ccircle cx='51' cy='160' r='7' fill='%23d1fae5' stroke='%23059669' stroke-width='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+    var(--bg-sketch-pattern),
     radial-gradient(circle at 15% 20%, rgba(2, 132, 199, 0.45) 0%, transparent 48%),
     radial-gradient(circle at 85% 70%, rgba(13, 148, 136, 0.42) 0%, transparent 48%),
-    radial-gradient(circle at 50% 20%, rgba(56, 189, 248, 0.35) 0%, transparent 45%),
     linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #ccfbf1 100%);
 }
 
 body.theme-materials {
-  /* Lush Textile Silk Emerald */
   background-image: 
-    url("data:image/svg+xml,%3Csvg width='340' height='340' viewBox='0 0 340 340' xmlns='http://www.w3.org/2000/svg'%3E%3Cg opacity='0.85'%3E%3Cg transform='rotate(30, 150, 140)'%3E%3Crect x='135' y='125' width='28' height='36' rx='4' fill='%23f3e8ff' stroke='%239333ea' stroke-width='2.2'/%3E%3C/g%3E%3Cg transform='rotate(25, 260, 250)'%3E%3Cpath d='M250,235 Q250,227 257,227 Q264,227 264,235 L285,250 L230,250 Z' fill='%23fef3c7' stroke='%23d97706' stroke-width='2.2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+    var(--bg-sketch-pattern),
     radial-gradient(circle at 20% 20%, rgba(16, 185, 129, 0.45) 0%, transparent 48%),
     radial-gradient(circle at 80% 80%, rgba(34, 197, 94, 0.42) 0%, transparent 48%),
-    radial-gradient(circle at 50% 30%, rgba(52, 211, 153, 0.35) 0%, transparent 45%),
     linear-gradient(135deg, #f0fdf4 0%, #dcfce7 50%, #d1fae5 100%);
 }
 
 body.theme-cutting {
-  /* Warm Saffron & Sunkissed Amber */
   background-image: 
-    url("data:image/svg+xml,%3Csvg width='340' height='340' viewBox='0 0 340 340' xmlns='http://www.w3.org/2000/svg'%3E%3Cg opacity='0.85'%3E%3Cg transform='rotate(-45, 45, 150)'%3E%3Ccircle cx='35' cy='160' r='7' fill='%23d1fae5' stroke='%23059669' stroke-width='2'/%3E%3Ccircle cx='51' cy='160' r='7' fill='%23d1fae5' stroke='%23059669' stroke-width='2'/%3E%3C/g%3E%3Cg transform='rotate(-15, 95, 190)'%3E%3Cpath d='M80,185 L110,185 L110,200 L80,200 Z' fill='%23fed7aa' stroke='%23ea580c' stroke-width='1.8'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+    var(--bg-sketch-pattern),
     radial-gradient(circle at 20% 20%, rgba(245, 158, 11, 0.45) 0%, transparent 48%),
     radial-gradient(circle at 80% 75%, rgba(251, 146, 60, 0.42) 0%, transparent 48%),
     linear-gradient(135deg, #fffbeb 0%, #fef3c7 50%, #ffedd5 100%);
 }
 
 body.theme-sewing {
-  /* Atelier Violet & Craft Blossom */
   background-image: 
-    url("data:image/svg+xml,%3Csvg width='340' height='340' viewBox='0 0 340 340' xmlns='http://www.w3.org/2000/svg'%3E%3Cg opacity='0.85'%3E%3Cg transform='rotate(30, 150, 140)'%3E%3Crect x='135' y='125' width='28' height='36' rx='4' fill='%23f3e8ff' stroke='%239333ea' stroke-width='2.2'/%3E%3C/g%3E%3Cg transform='rotate(-22, 260, 150)'%3E%3Cpath d='M235,125 L285,125 L292,180 L272,180 L260,145 L248,180 L228,180 Z' fill='%23ffe4e6' stroke='%23f43f5e' stroke-width='2.2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+    var(--bg-sketch-pattern),
     radial-gradient(circle at 25% 25%, rgba(139, 92, 246, 0.45) 0%, transparent 48%),
     radial-gradient(circle at 75% 75%, rgba(244, 114, 182, 0.42) 0%, transparent 48%),
     linear-gradient(135deg, #f5f3ff 0%, #f3e8ff 50%, #fdf2f8 100%);
 }
 
 body.theme-techpack {
-  /* High-Fashion Royal Pearl & Sapphire */
   background-image: 
-    url("data:image/svg+xml,%3Csvg width='340' height='340' viewBox='0 0 340 340' xmlns='http://www.w3.org/2000/svg'%3E%3Cg opacity='0.85'%3E%3Cg transform='rotate(25, 260, 250)'%3E%3Cpath d='M250,235 Q250,227 257,227 Q264,227 264,235 L285,250 L230,250 Z' fill='%23fef3c7' stroke='%23d97706' stroke-width='2.2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+    var(--bg-sketch-pattern),
     radial-gradient(circle at 15% 15%, rgba(59, 130, 246, 0.38) 0%, transparent 48%),
     radial-gradient(circle at 85% 85%, rgba(99, 102, 241, 0.38) 0%, transparent 48%),
     linear-gradient(135deg, #f8fafc 0%, #eff6ff 50%, #e0e7ff 100%);
 }
 
 body.theme-costing {
-  /* Golden Prosperity Mint */
   background-image: 
-    url("data:image/svg+xml,%3Csvg width='340' height='340' viewBox='0 0 340 340' xmlns='http://www.w3.org/2000/svg'%3E%3Cg opacity='0.85'%3E%3Cg transform='rotate(38, 260, 45)'%3E%3Cpath d='M245,20 Q260,15 275,20 L282,45 Q272,58 260,50 Q248,58 238,45 Z' fill='%23fef08a' stroke='%23eab308' stroke-width='2.2'/%3E%3C/g%3E%3Cg transform='rotate(25, 260, 250)'%3E%3Cpath d='M250,235 Q250,227 257,227 Q264,227 264,235 L285,250 L230,250 Z' fill='%23fef3c7' stroke='%23d97706' stroke-width='2.2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+    var(--bg-sketch-pattern),
     radial-gradient(circle at 20% 20%, rgba(16, 185, 129, 0.42) 0%, transparent 48%),
     radial-gradient(circle at 80% 70%, rgba(234, 179, 8, 0.42) 0%, transparent 48%),
     linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #fef9c3 100%);
 }
 
 body.theme-production {
-  /* Production Turquoise & Lime */
   background-image: 
-    url("data:image/svg+xml,%3Csvg width='340' height='340' viewBox='0 0 340 340' xmlns='http://www.w3.org/2000/svg'%3E%3Cg opacity='0.85'%3E%3Cg transform='rotate(-45, 45, 150)'%3E%3Ccircle cx='35' cy='160' r='7' fill='%23d1fae5' stroke='%23059669' stroke-width='2'/%3E%3Ccircle cx='51' cy='160' r='7' fill='%23d1fae5' stroke='%23059669' stroke-width='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+    var(--bg-sketch-pattern),
     radial-gradient(circle at 20% 20%, rgba(6, 182, 212, 0.42) 0%, transparent 48%),
     radial-gradient(circle at 80% 80%, rgba(132, 204, 22, 0.42) 0%, transparent 48%),
     linear-gradient(135deg, #ecfeff 0%, #cffafe 50%, #f7fee7 100%);
 }
 
 body.theme-analytics {
-  /* Analytics Ultramarine */
   background-image: 
-    url("data:image/svg+xml,%3Csvg width='340' height='340' viewBox='0 0 340 340' xmlns='http://www.w3.org/2000/svg'%3E%3Cg opacity='0.85'%3E%3Cg transform='rotate(30, 150, 140)'%3E%3Crect x='135' y='125' width='28' height='36' rx='4' fill='%23f3e8ff' stroke='%239333ea' stroke-width='2.2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+    var(--bg-sketch-pattern),
     radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.42) 0%, transparent 48%),
     radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.42) 0%, transparent 48%),
     linear-gradient(135deg, #eef2ff 0%, #ede9fe 50%, #fae8ff 100%);
 }
 
 body.theme-library {
-  /* Honey & Golden Amber */
   background-image: 
-    url("data:image/svg+xml,%3Csvg width='340' height='340' viewBox='0 0 340 340' xmlns='http://www.w3.org/2000/svg'%3E%3Cg opacity='0.85'%3E%3Cg transform='rotate(25, 260, 250)'%3E%3Cpath d='M250,235 Q250,227 257,227 Q264,227 264,235 L285,250 L230,250 Z' fill='%23fef3c7' stroke='%23d97706' stroke-width='2.2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+    var(--bg-sketch-pattern),
     radial-gradient(circle at 20% 20%, rgba(217, 119, 6, 0.42) 0%, transparent 48%),
     radial-gradient(circle at 80% 80%, rgba(245, 158, 11, 0.42) 0%, transparent 48%),
     linear-gradient(135deg, #fffbeb 0%, #fefce8 50%, #fef3c7 100%);
 }
 
 body.theme-ai-technologist {
-  /* Futuristic AI Magenta & Cyber Cyan */
   background-image: 
-    url("data:image/svg+xml,%3Csvg width='340' height='340' viewBox='0 0 340 340' xmlns='http://www.w3.org/2000/svg'%3E%3Cg opacity='0.85'%3E%3Cg transform='rotate(-28, 155, 45)'%3E%3Cpath d='M140,25 Q125,10 155,5 Q185,10 170,25 L185,70 L125,70 Z' fill='%23e0f2fe' stroke='%230284c7' stroke-width='2.2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+    var(--bg-sketch-pattern),
     radial-gradient(circle at 25% 20%, rgba(217, 70, 239, 0.45) 0%, transparent 48%),
     radial-gradient(circle at 80% 75%, rgba(6, 182, 212, 0.45) 0%, transparent 48%),
     linear-gradient(135deg, #fdf4ff 0%, #f5d0fe 50%, #cffafe 100%);
 }
 
 body.theme-korxona {
-  /* Korxona Floor Energetic Emerald & Sky */
   background-image: 
-    url("data:image/svg+xml,%3Csvg width='340' height='340' viewBox='0 0 340 340' xmlns='http://www.w3.org/2000/svg'%3E%3Cg opacity='0.85'%3E%3Cg transform='rotate(-45, 45, 150)'%3E%3Ccircle cx='35' cy='160' r='7' fill='%23d1fae5' stroke='%23059669' stroke-width='2'/%3E%3Ccircle cx='51' cy='160' r='7' fill='%23d1fae5' stroke='%23059669' stroke-width='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+    var(--bg-sketch-pattern),
     radial-gradient(circle at 20% 20%, rgba(5, 150, 105, 0.45) 0%, transparent 48%),
     radial-gradient(circle at 80% 80%, rgba(2, 132, 199, 0.45) 0%, transparent 48%),
     linear-gradient(135deg, #ecfdf5 0%, #a7f3d0 50%, #e0f2fe 100%);
@@ -222,7 +199,7 @@ body.theme-korxona {
 
 /* PLAYFUL & COUTURE HEADINGS */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Fredoka', 'Outfit', sans-serif;
+  font-family: 'Fredoka', sans-serif;
   font-weight: 700;
   color: var(--text-main);
   letter-spacing: -0.2px;
@@ -230,6 +207,18 @@ h1, h2, h3, h4, h5, h6 {
 
 code, pre, .formula-box, .formula-text {
   font-family: 'Fira Code', monospace;
+}
+
+/* SECTION PERFORMANCE OPTIMIZATION */
+.view-section {
+  display: none;
+  contain: content;
+  content-visibility: auto;
+  contain-intrinsic-size: 800px;
+}
+
+.view-section.active {
+  display: block;
 }
 
 /* ================== APP CONTAINER ================== */

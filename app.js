@@ -9,11 +9,21 @@ class AppController {
     this.floorTimerInterval = null;
     this.floorPiecesToday = 48;
     this.isVip = false;
+    this.renderedViews = new Set();
 
     // Telegram Bot Integration (Direct to Bot)
     this.telegramConfig = {
       botToken: '8888011680:AAHMg7QlZuuls8IYmgyptkYUGgui4zl0bqA',
       chatId: '1008172442' // Guli Shamsiyeva (@guli22s)
+    };
+  }
+
+  // Lightweight debounce helper
+  debounce(func, wait = 120) {
+    let timeout;
+    return (...args) => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func.apply(this, args), wait);
     };
   }
 
@@ -23,26 +33,17 @@ class AppController {
     this.bindEvents();
     this.populateTopModelSelector();
     this.populateNewModelFabricSelect();
+
+    // Fast Initial Boot: Render ONLY the active dashboard view immediately
     this.renderDashboard();
-    this.renderAllModels();
-    this.renderAiDesigner();
-    this.renderCad();
-    this.renderMaterials();
-    this.updateCuttingCalculations();
-    this.renderSewingOps();
-    this.renderTechPack();
-    this.updateCostingCalculations();
-    this.renderProductionQc();
-    this.renderAnalytics();
-    this.switchLibTab('sizes');
-    this.renderAiChat();
+    this.renderedViews.add('dashboard');
     this.startFloorStopwatch();
   }
 
   bindEvents() {
     // Navigation (Sidebar Tabs)
     document.querySelectorAll('.sidebar-nav .nav-item').forEach(item => {
-      item.addEventListener('click', (e) => {
+      item.addEventListener('click', () => {
         const view = item.getAttribute('data-view');
         if (view) this.navigateTo(view);
       });
@@ -58,11 +59,12 @@ class AppController {
       });
     });
 
-    // Global Search
+    // Global Search with debounce
     const searchInput = document.getElementById('globalSearchInput');
     if (searchInput) {
+      const debouncedFilter = this.debounce((val) => this.filterModels(val), 150);
       searchInput.addEventListener('input', (e) => {
-        this.filterModels(e.target.value);
+        debouncedFilter(e.target.value);
       });
     }
 
@@ -96,7 +98,7 @@ class AppController {
       });
     });
 
-    // CAD Sliders & Controls
+    // CAD Sliders & Controls with debounce
     const cadSizeSel = document.getElementById('cadSizeSelector');
     if (cadSizeSel) {
       cadSizeSel.addEventListener('change', (e) => {
@@ -105,13 +107,15 @@ class AppController {
       });
     }
 
+    const debouncedRenderCad = this.debounce(() => this.renderCad(), 100);
+
     const cadSeam = document.getElementById('cadSeamSlider');
     if (cadSeam) {
       cadSeam.addEventListener('input', (e) => {
         patternCad.seamAllowance = parseFloat(e.target.value);
         const disp = document.getElementById('seamValDisplay');
         if (disp) disp.textContent = `${e.target.value} sm`;
-        this.renderCad();
+        debouncedRenderCad();
       });
     }
 
@@ -121,7 +125,7 @@ class AppController {
         patternCad.easeAllowance = parseFloat(e.target.value);
         const disp = document.getElementById('easeValDisplay');
         if (disp) disp.textContent = `+${e.target.value} sm`;
-        this.renderCad();
+        debouncedRenderCad();
       });
     }
 
@@ -172,15 +176,8 @@ class AppController {
 
     // Language change event listener
     window.addEventListener('languageChanged', () => {
-      this.renderDashboard();
-      this.renderAllModels();
-      this.renderMaterials();
-      this.renderSewingOps();
-      this.renderTechPack();
-      this.renderProductionQc();
-      this.renderAiChat();
-      this.renderCad();
-      this.switchLibTab(this.activeLibTab);
+      this.renderedViews.clear();
+      this.renderViewOnDemand(this.currentView, true);
     });
   }
 
@@ -217,15 +214,59 @@ class AppController {
       header.textContent = t(`nav_${viewId.replace('-', '_')}`) || viewId;
     }
 
-    // Dynamic refreshes for view
-    if (viewId === 'models') this.renderAllModels();
-    if (viewId === 'dashboard') this.renderDashboard();
-    if (viewId === 'analytics') this.renderAnalytics();
-    if (viewId === 'cad') this.renderCad();
-    if (viewId === 'cutting') this.updateCuttingCalculations();
-    if (viewId === 'techpack') this.renderTechPack();
-    if (viewId === 'costing') this.updateCostingCalculations();
-    if (viewId === 'ai-technologist') this.renderAiChat();
+    // Lazy load & render the view only when navigated to
+    this.renderViewOnDemand(viewId);
+  }
+
+  renderViewOnDemand(viewId, force = false) {
+    if (!force && this.renderedViews && this.renderedViews.has(viewId)) {
+      return;
+    }
+    if (!this.renderedViews) this.renderedViews = new Set();
+
+    switch (viewId) {
+      case 'dashboard':
+        this.renderDashboard();
+        break;
+      case 'models':
+        this.renderAllModels();
+        break;
+      case 'designer':
+        this.renderAiDesigner();
+        break;
+      case 'cad':
+        this.renderCad();
+        break;
+      case 'materials':
+        this.renderMaterials();
+        break;
+      case 'cutting':
+        this.updateCuttingCalculations();
+        break;
+      case 'sewing':
+        this.renderSewingOps();
+        break;
+      case 'techpack':
+        this.renderTechPack();
+        break;
+      case 'costing':
+        this.updateCostingCalculations();
+        break;
+      case 'production':
+      case 'korxona':
+        this.renderProductionQc();
+        break;
+      case 'analytics':
+        this.renderAnalytics();
+        break;
+      case 'library':
+        this.switchLibTab(this.activeLibTab || 'sizes');
+        break;
+      case 'ai-technologist':
+        this.renderAiChat();
+        break;
+    }
+    this.renderedViews.add(viewId);
   }
 
   populateTopModelSelector() {
@@ -255,55 +296,28 @@ class AppController {
 
     // Update Top Selector & Hero Selector
     const topSel = document.getElementById('topModelSelector');
-    if (topSel) topSel.value = modelId;
+    if (topSel && topSel.value !== modelId) topSel.value = modelId;
     const heroSel = document.getElementById('heroQuickModelSelect');
-    if (heroSel) heroSel.value = modelId;
+    if (heroSel && heroSel.value !== modelId) heroSel.value = modelId;
 
-    // 1. Update Dashboard & Active Model Hero
-    this.renderDashboardActiveModelHero();
-    this.renderDashboard();
+    // Invalidate cached views so other tabs re-render with new model data when clicked
+    this.renderedViews.clear();
 
-    // 2. Update CAD Studio (Lekalo)
-    this.renderCad();
+    // Re-render currently active view
+    this.renderViewOnDemand(this.currentView, true);
 
-    // 3. Update Cutting & Consumption
+    // If on dashboard, sync hero
+    if (this.currentView === 'dashboard') {
+      this.renderDashboardActiveModelHero();
+    }
+
+    // Sync cutting inputs if model has it
     if (model.singleConsumptionMeters) {
       const cutUnitLen = document.getElementById('cutUnitLength');
       if (cutUnitLen) cutUnitLen.value = model.singleConsumptionMeters;
     }
-    this.updateCuttingCalculations();
 
-    // 4. Update Sewing Operations & Routing Table
-    this.renderSewingOps();
-
-    // 5. Update Production Tech Pack (8 Tables)
-    this.renderTechPack();
-
-    // 6. Update Costing Calculations
-    if (model.costing) {
-      const cFab = document.getElementById('costFabricInput');
-      const cTrim = document.getElementById('costTrimsInput');
-      const cThrd = document.getElementById('costThreadInput');
-      const cCut = document.getElementById('costCuttingInput');
-      const cSew = document.getElementById('costSewingInput');
-      const cPack = document.getElementById('costPackingInput');
-      if (cFab) cFab.value = model.costing.fabricCost || 20000;
-      if (cTrim) cTrim.value = model.costing.trimsCost || 5000;
-      if (cThrd) cThrd.value = model.costing.threadCost || 1200;
-      if (cCut) cCut.value = model.costing.cuttingCost || 3000;
-      if (cSew) cSew.value = model.costing.sewingCost || 30000;
-      if (cPack) cPack.value = model.costing.packingCost || 1800;
-    }
-    this.updateCostingCalculations();
-
-    // 7. Update Production & QC
-    this.renderProductionQc();
-
-    // 8. Update AI Designer view
-    this.renderAiDesigner();
-
-    // 9. Update Models Catalog showcase & active cards
-    this.renderBottomModelShowcase(modelId);
+    // Update Models Catalog active cards if models view is rendered
     document.querySelectorAll('.model-card').forEach(card => {
       const cardId = card.getAttribute('data-model-id');
       card.classList.toggle('active-selected', cardId === modelId);
