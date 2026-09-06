@@ -524,117 +524,17 @@ class AppController {
     } else {
       grid.innerHTML = models.map(m => this.renderModelCardHtml(m)).join('');
     }
-
-    this.renderBottomModelShowcase(this.selectedModelId);
   }
 
   selectModelInCatalog(modelId) {
     this.onModelSelected(modelId);
-
     if (this.currentView !== 'models') {
       this.navigateTo('models');
     }
-
-    // Smooth scroll to showcase
-    setTimeout(() => {
-      const showcase = document.getElementById('selectedModelBottomShowcase');
-      if (showcase) {
-        showcase.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }, 80);
   }
 
-  renderBottomModelShowcase(modelId) {
-    const showcase = document.getElementById('selectedModelBottomShowcase');
-    if (!showcase) return;
-
-    const model = db.getModelById(modelId) || db.getModels()[0];
-    if (!model) return;
-
-    const frontSvg = aiDesigner.renderForModel(model, 'front');
-    const backSvg = aiDesigner.renderForModel(model, 'back');
-    const sideSvg = aiDesigner.renderForModel(model, 'side');
-
-    const costStr = model.costing ? costingEngine.formatCurrency(model.costing.totalUnitCost) : "87 500 so'm";
-    const priceStr = model.costing ? costingEngine.formatCurrency(model.costing.recommendedPrice) : "118 000 so'm";
-    const totalOpsTime = model.operations ? model.operations.reduce((s, o) => s + (o.timeSec || 0), 0) : 200;
-    const timeFormatted = sewingCalculator.formatTime(totalOpsTime);
-
-    showcase.innerHTML = `
-      <div class="showcase-header-bar">
-        <div class="showcase-title-wrap">
-          <div class="showcase-icon-badge">👗</div>
-          <div class="showcase-title">
-            <h3>${model.code} — ${model.name}</h3>
-            <div class="showcase-tags-row">
-              <span class="showcase-badge primary">${t(model.category || 'cat_hoodie')}</span>
-              <span class="showcase-badge pink">${model.ageGroup || '7-8 yosh'}</span>
-              <span class="showcase-badge emerald">Asosiy Razmer: ${model.baseSize || '122'} sm</span>
-              <span class="showcase-badge">${model.season || 'Kuz-Bahor 2026'}</span>
-              <span class="showcase-badge" style="background:#fef3c7; color:#b45309;">● ${model.currentStage || 'Tayyor'}</span>
-            </div>
-          </div>
-        </div>
-
-        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-          <button class="btn btn-primary btn-sm" onclick="app.selectModelAndGo('${model.id}', 'cad')">📐 Lekalo Konstruktori</button>
-          <button class="btn btn-outline btn-sm" onclick="app.selectModelAndGo('${model.id}', 'techpack')">📋 Texnologik Karta</button>
-          <button class="btn btn-outline btn-sm" onclick="app.selectModelAndGo('${model.id}', 'cutting')">✂️ Bichuv Sarfi</button>
-          <button class="btn btn-accent btn-sm" onclick="app.selectModelAndGo('${model.id}', 'costing')">💰 Tannarx</button>
-        </div>
-      </div>
-
-      <!-- 3-ANGLE PICTURES SHOWCASE -->
-      <div class="showcase-views-grid">
-        <div class="showcase-view-card">
-          <span class="showcase-view-label">✨ OLD KO'RINISH (FRONT VIEW)</span>
-          <div class="showcase-svg-wrap">
-            ${frontSvg}
-          </div>
-        </div>
-
-        <div class="showcase-view-card">
-          <span class="showcase-view-label">🔄 ORQA KO'RINISH (BACK VIEW)</span>
-          <div class="showcase-svg-wrap">
-            ${backSvg}
-          </div>
-        </div>
-
-        <div class="showcase-view-card">
-          <span class="showcase-view-label">📐 YON KO'RINISH (SIDE PROFILE)</span>
-          <div class="showcase-svg-wrap">
-            ${sideSvg}
-          </div>
-        </div>
-      </div>
-
-      <!-- MODEL SPECS SUMMARY -->
-      <div class="showcase-specs-panel">
-        <div class="showcase-spec-box">
-          <span class="label">🧵 ASOSIY MATO</span>
-          <span class="val">${model.fabricName || 'Futer 3-ipli'}</span>
-          <span class="sub">Eni: ${model.fabricWidthCm || 185} sm | ${model.fabricColor || 'Standart'}</span>
-        </div>
-
-        <div class="showcase-spec-box">
-          <span class="label">✂️ BIR DONA MATO SARFI</span>
-          <span class="val">${model.singleConsumptionMeters || 0.82} metr / ${model.singleConsumptionKg || 0.485} kg</span>
-          <span class="sub">Bichuv unumdorligi: ${model.markerEfficiency || 87.4}%</span>
-        </div>
-
-        <div class="showcase-spec-box">
-          <span class="label">🪡 TIKUV ME'YORI VAQT</span>
-          <span class="val">${timeFormatted} (${totalOpsTime} sek)</span>
-          <span class="sub">${model.operations ? model.operations.length : 5} ta texnologik operatsiya</span>
-        </div>
-
-        <div class="showcase-spec-box">
-          <span class="label">💰 TANNARX VA TAVSIYA NARX</span>
-          <span class="val" style="color:#0284c7;">${costStr} ➔ ${priceStr}</span>
-          <span class="sub">Rejalashtirilgan foyda: ${model.costing ? model.costing.targetMarginPercent : 35}%</span>
-        </div>
-      </div>
-    `;
+  renderBottomModelShowcase() {
+    // Deprecated in favor of direct 3-view cards
   }
 
   renderModelCardHtml(model) {
@@ -642,33 +542,54 @@ class AppController {
     const statusClass = model.status || 'ready';
     const statusLabel = model.currentStage || t(`status_${model.status}`);
     const isSelected = model.id === this.selectedModelId;
-    const thumbnailSvg = aiDesigner.renderForModel(model, 'front');
+
+    const frontSvg = aiDesigner.renderForModel(model, 'front');
+    const backSvg = aiDesigner.renderForModel(model, 'back');
+    const sideSvg = aiDesigner.renderForModel(model, 'side');
 
     return `
       <div class="model-card ${isSelected ? 'active-selected' : ''}" data-model-id="${model.id}" onclick="app.onModelSelected('${model.id}')" style="cursor: pointer; position: relative;">
-        ${isSelected ? `<span class="selected-active-ribbon">✓ FAOL MODEL</span>` : ''}
-        <div class="model-card-visual">
-          <span class="model-code-tag">${model.code}</span>
-          <span class="model-status-tag ${statusClass}">● ${statusLabel}</span>
-          ${thumbnailSvg}
+        ${isSelected ? `<span class="selected-active-ribbon">✓ TANLANGAN MODEL</span>` : ''}
+
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px 6px 16px;">
+          <span class="model-code-tag" style="position: static;">${model.code}</span>
+          <span class="model-status-tag ${statusClass}" style="position: static;">● ${statusLabel}</span>
         </div>
+
+        <!-- 3-ANGLE PICTURES IN CARD -->
+        <div class="model-card-triple-visual">
+          <div class="visual-angle-box" title="Old ko'rinish">
+            <span class="visual-angle-tag">✨ Oldi</span>
+            <div class="angle-svg-wrap">${frontSvg}</div>
+          </div>
+          <div class="visual-angle-box" title="Orqa ko'rinish">
+            <span class="visual-angle-tag">🔄 Orqasi</span>
+            <div class="angle-svg-wrap">${backSvg}</div>
+          </div>
+          <div class="visual-angle-box" title="Yon ko'rinish">
+            <span class="visual-angle-tag">📐 Yoni</span>
+            <div class="angle-svg-wrap">${sideSvg}</div>
+          </div>
+        </div>
+
         <div class="model-card-body">
           <h4 class="model-card-name">${model.name}</h4>
           <div class="model-specs-list">
             <span>Kategoriya: <strong>${t(model.category)}</strong></span>
             <span>Yosh: <strong>${model.ageGroup}</strong></span>
             <span>Razmer: <strong>${model.baseSize} sm</strong></span>
-            <span>Mato: <strong>${model.fabricName}</strong></span>
+            <span>Mato: <strong>${model.fabricName || 'Futer'}</strong></span>
+            <span>Sarf: <strong>${model.singleConsumptionMeters || 0.82} m</strong></span>
           </div>
-          <div class="model-cost-row" onclick="event.stopPropagation()">
+
+          <div class="model-cost-row">
             <div class="model-cost-box">
-              <div class="label" data-i18n="field_cost">TANNARX</div>
-              <div class="cost-val">${cost}</div>
+              <span class="label">Tannarxi:</span>
+              <span class="cost-val">${cost}</span>
             </div>
             <div class="model-card-actions">
-              <button class="btn ${isSelected ? 'btn-success' : 'btn-primary'} btn-sm" onclick="app.onModelSelected('${model.id}')">
-                ${isSelected ? '✓ Tanlangan' : '⚡ Tanlash'}
-              </button>
+              <button class="btn btn-primary btn-sm" onclick="event.stopPropagation(); app.selectModelAndGo('${model.id}', 'cad')">📐 Lekalo</button>
+              <button class="btn btn-outline btn-sm" onclick="event.stopPropagation(); app.selectModelAndGo('${model.id}', 'techpack')">📋 Karta</button>
             </div>
           </div>
         </div>
